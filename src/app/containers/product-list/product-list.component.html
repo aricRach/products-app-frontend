@@ -1,0 +1,18 @@
+<div class="row">
+  <input type="text" placeholder="Search..." [formControl]="search" class="form-control w-50'">
+</div>
+
+<!--option2-->
+<div class="row">
+<div class="col-md-3" *ngFor="let item of plist | filterBy: 'productName' : search.value" appShadowEffect>
+  <app-product [currencyCode]="selectedCode" [data]="item" (btnClicked)="addItem(item)"></app-product>
+</div>
+</div>
+
+<!--option3-->
+<!--<div class="row" *ngIf="currencyCode$ | async; let code">-->
+<!--  <div class="col-md-3" *ngFor="let item of plist | filterBy: 'productName' : search.value" appShadowEffect>-->
+<!--    <app-product [currencyCode]="code" [data]="item" (btnClicked)="addItem($event)"></app-product>-->
+<!--  </div>-->
+<!--</div>-->
+<input type="text" appNumbersOnly>

@@ -1,0 +1,17 @@
+<div class="row">
+  <input
+    type="text"
+    placeholder="search..."
+    [formControl]="search"
+    class="form-control w-50"
+  >
+</div>
+<div class="row my-4">
+  <div class="card col-md-4 bg-light" *ngFor="let data of dataset">
+    <div class="card-body">
+      <a [href]="data.html_url" target="_blank" class="card-link">
+        {{ data.name }}</a
+      >
+    </div>
+  </div>
+</div>

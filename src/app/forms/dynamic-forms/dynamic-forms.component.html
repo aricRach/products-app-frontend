@@ -1,0 +1,24 @@
+<form [formGroup]="linkedinform">
+  <div>
+    <label>Name</label>
+    <input type="text" formControlName="name">
+  </div>
+
+  <div>
+    <label>Email</label>
+    <input type="email" formControlName="email">
+  </div>
+
+  <div formArrayName="experience">
+    <button type="button" (click)="addExperience()">Add</button>
+
+    <div [formGroupName]="i"
+      *ngFor="let exp of experienceObj.controls; let i = index">
+      <input type="text" placeholder="Organization" formControlName="org">
+      <input type="number" placeholder="No of Yrs" formControlName="yrs">
+      <button type="button" (click)="removeExperience(i)">Remove</button>
+    </div>
+  </div>
+</form>
+
+<pre> {{linkedinform.value | json}}</pre>

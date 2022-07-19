@@ -1,0 +1,14 @@
+<div class="p-4 justify-center align-items-center d-flex flex-column">
+  <a [routerLink]="['/detail', data.productId]">
+  <img [src]="data.productImage" class="img-thumbnail">
+  </a>
+  <h3>{{data.productName | uppercase}}</h3>
+  <h4>{{data.productPrice | conversion:currencyCode | currency: currencyCode}}</h4>
+  {{data.productPrice | discount}}
+  <button class="btn btn-primary btn-sm w-100" (click)="notifyParent()" *ngIf="data.productStock>0; else stock">add to cart</button>
+</div>
+
+<ng-template #stock>
+  <p>out of stock</p>
+  <button>notify me</button>
+</ng-template>

@@ -1,0 +1,42 @@
+<form [formGroup]="userForm" (submit)="saveData()" class="bg-light border rounded p-4">
+  <div class="form-group">
+    <label>Name</label>
+    <input type="text" appUppercase formControlName="name" class="form-control">
+    <div *ngIf="userForm.get('name')?.touched">
+      <small *ngIf="userForm.get('name')?.hasError('required')">Name is required</small>
+      <small *ngIf="userForm.get('name')?.hasError('minlength')">the minimum length is 5</small>
+    </div>
+  </div>
+  <div class="form-group">
+    <label>Age</label>
+    <input type="text" formControlName="age" class="form-control">
+  </div>
+
+  <div class="form-group">
+    <label>Email</label>
+    <input type="text" formControlName="email" class="form-control">
+  </div>
+
+  <div formGroupName="address" class="row">
+    <div class="form-group col-md-4">
+      <label>Street</label>
+      <input type="text" formControlName="street" class="form-control">
+    </div>
+    <div class="form-group col-md-4">
+      <label>City</label>
+      <input type="text" formControlName="city" class="form-control">
+    </div>
+    <div class="form-group col-md-4">
+      <label>Zipcode</label>
+      <input type="text" formControlName="zipcode" class="form-control">
+      <small *ngIf="userForm.get('address')?.get('zipcode')?.hasError('zipCode')">
+       Only Allowed zipCode is:  {{userForm.get('address')?.get('zipcode')?.getError('zipCode')?.allowedCode}}
+      </small>
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-success btn-sm my-4">Submit</button>
+</form>
+
+<pre class="bg-light rounded border p-2 mt-4">{{userForm.value | json}}</pre>
+<pre class="bg-light rounded border p-2 mt-4">{{userForm.get('address')?.get('zipcode')?.errors | json}}</pre>

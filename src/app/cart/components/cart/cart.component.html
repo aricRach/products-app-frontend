@@ -1,0 +1,5 @@
+<div *ngFor="let item of (cartItems$ | async)">
+  <h1>{{item.productName}}</h1>
+  <img [src]=item.productImage>
+  <h3>{{item.productId}}</h3>
+</div>
