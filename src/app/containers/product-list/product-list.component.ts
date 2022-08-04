@@ -71,7 +71,6 @@ export class ProductListComponent implements OnInit, OnDestroy {
   addItem(data: CartItem): void {
     console.log('add to cart', data);
     this.store.dispatch(new AddToCart(data));
-    // this.router.navigate(['/cart']);
   }
 
   ngOnDestroy(): void { // option 2

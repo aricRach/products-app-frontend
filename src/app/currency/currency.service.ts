@@ -8,7 +8,7 @@ import {BehaviorSubject, Observable} from 'rxjs';
 export class CurrencyService {
 
   // tslint:disable-next-line:variable-name
-  private _code = 'INR';
+  private _code = 'INR'; // israeli ILS
   private currencySubject = new BehaviorSubject(this._code);
   // SUBJECT : will only give the next data
   // BEHAVIORSUBJECT : initial data + next data

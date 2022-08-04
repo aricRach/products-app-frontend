@@ -1,0 +1,7 @@
+.counter {
+  display: flex;
+}
+
+button {
+  border-radius: 50%;
+}

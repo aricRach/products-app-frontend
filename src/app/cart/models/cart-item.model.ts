@@ -6,4 +6,5 @@ export interface CartItem {
   productSalePrice: string;
   productStock: number;
   rating: number;
+  numberOfItems: number;
 }

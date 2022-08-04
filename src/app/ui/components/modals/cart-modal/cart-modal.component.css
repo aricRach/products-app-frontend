@@ -2,3 +2,29 @@ img {
   width: 60px;
   margin-right: 5px;
 }
+
+.cart-item {
+  display: flex;
+  margin-top: 5px;
+}
+
+.cart-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+/*.modal{ height: 100vh; width: 100%;}*/
+/*.modal-header{ height: 5vh;}*/
+/*.modal-footer{ height: 5vh;}*/
+/*.modal-body{ height: calc(90vh - 500px)}*/
+
+
+::ng-deep .mat-dialog-container {
+  /*overflow-y: hidden !important;*/
+  overflow-y: overlay !important;
+}
+
+.central-item-details {
+  width: 70%;
+}
+

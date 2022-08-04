@@ -1,17 +1,23 @@
+<div class="cart-header">
 <h1 class="dialog-header" mat-dialog-title>Cart</h1>
-
-<div>
-  <div *ngFor="let item of (cartItems$ | async)">
-    <div class="cart-item">
-      <img [src]=item.productImage>
-      <div>
-      <h6>{{item.productName}}</h6>
-      <h6>{{item.productPrice | conversion:currencyCode | currency: currencyCode}}</h6>
-      </div>
-    </div>
-  </div>
-
+<h5>Total Price: {{cartItemsTotalPrice$ | async | conversion:currencyCode | currency: currencyCode}}</h5>
 </div>
+
+<div *ngIf="!isCartEmpty; else cartEmpty" mat-dialog-content>
+  <div class="cart-item"  *ngFor="let item of (cartItems$ | async)">
+      <img [src]=item.productImage>
+      <div class="central-item-details">
+        <h6>{{item.productName}}</h6>
+        <h6>{{item.productPrice | conversion:currencyCode | currency: currencyCode}}</h6>
+        <button (click)="removeFromCart(item)">delete</button>
+      </div>
+      <app-counter [productId]="item.productId" (counterClicked)="onCounterClicked($event)" [numberOfItems]="item.numberOfItems"></app-counter>
+  </div>
+</div>
+
+<ng-template #cartEmpty>
+  <p>please add items to cart</p>
+</ng-template>
 
 <div mat-dialog-actions>
   <button mat-button mat-dialog-close>cancel</button>

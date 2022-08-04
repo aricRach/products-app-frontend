@@ -13,8 +13,8 @@ export class ModalsService {
     return this.dialog.open(CartModalComponent, {
       width: '500px',
       height: '540px',
-      panelClass: 'cart-dialog-container',
-      autoFocus: false
+      // panelClass: 'cart-dialog-container',
+      autoFocus: false,
     });
   }
 }
