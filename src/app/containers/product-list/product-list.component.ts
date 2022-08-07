@@ -4,10 +4,9 @@ import {ProductService} from '../../services/product.service';
 import {FormControl} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {CurrencyService} from '../../currency/currency.service';
-import {Observable, Subscription} from 'rxjs';
-import {Select, Store} from '@ngxs/store';
+import {Subscription} from 'rxjs';
+import {Store} from '@ngxs/store';
 import {AddToCart} from '../../cart/cart-actions.actions';
-import {CartState} from '../../cart/cart.state';
 import {CartItem} from '../../cart/models/cart-item.model';
 
 @Component({
@@ -61,6 +60,16 @@ export class ProductListComponent implements OnInit, OnDestroy {
       (data: ProductType[]) => {
         console.log('success', data);
         this.plist = data;
+        this.plist.map((item: ProductType, index) => {
+          if (index % 2 === 0) {
+            // return {...item, discountPercent: 10};
+            item.discountPercent = 10;
+            return item;
+            // return {...item, discountPercent: 10};
+          }
+          return item;
+        });
+        console.log(this.plist);
       },
       (err: any) => {
         console.log('error', err);
