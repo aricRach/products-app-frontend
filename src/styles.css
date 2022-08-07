@@ -2,3 +2,12 @@
 /*.cart-dialog-container .mat-dialog-content {*/
 /*  overflow: hidden;*/
 /*}*/
+.discount {
+  text-decoration: line-through;
+  color: red;
+  font-size: 20px;
+}
+
+.in-row {
+  display: flex;
+}

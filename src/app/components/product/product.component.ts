@@ -27,10 +27,4 @@ export class ProductComponent implements OnInit {
       name: this.data.productName
     });
   }
-
-  calculateDiscount(): string {
-    console.log('discount calculation');
-    return '50% off';
-  }
-
 }

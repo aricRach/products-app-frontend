@@ -20,7 +20,9 @@ export class CartState {
   static getCartTotalPrice(state: CartStateModel): number {
     let totalPrice = 0;
     for (const item of state.cartItems) {
-      totalPrice += +item.productPrice * item.numberOfItems;
+      console.log(item);
+      totalPrice += item.discountPercent > 0 ? (item.productPrice - item.productPrice * (item.discountPercent / 100)) * item.numberOfItems
+        : item.productPrice * item.numberOfItems;
     }
     return totalPrice;
   }

@@ -27,9 +27,6 @@ import {UserModule} from './user/user.module';
 import {HttpErrorInterceptor} from './services/http-error.interceptor';
 import {NgxsModule} from '@ngxs/store';
 import {CartState} from './cart/cart.state';
-import { CartComponent } from './cart/components/cart/cart.component';
-import {CartModule} from './cart/cart.module';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {PipesModule} from './pipes/pipes.module';
 
 @NgModule({
@@ -56,7 +53,6 @@ import {PipesModule} from './pipes/pipes.module';
     SearchModule,
     CurrencyModule,
     UserModule,
-    CartModule,
     PipesModule,
     NgxsModule.forRoot([CartState]),
   ],

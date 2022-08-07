@@ -28,3 +28,10 @@ img {
   width: 70%;
 }
 
+.discount-cart-item {
+  margin-left: 10px;
+}
+
+.prev {
+  font-size: 14px;
+}
