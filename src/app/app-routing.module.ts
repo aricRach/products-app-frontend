@@ -10,14 +10,14 @@ import {ProductDetailComponent} from './containers/product-detail/product-detail
 import {GithubSearchComponent} from './search/github-search/github-search.component';
 import {LoginComponent} from './user/login/login.component';
 import {AuthGuard} from './user/auth.guard';
-import {CartComponent} from './cart/components/cart/cart.component';
+import {AddProductComponent} from './containers/add-product/add-product.component';
+import {ExitFormGuard} from './ui/components/modals/exit-form.guard';
 
 
 const routes: Routes = [
   { path: '', component: ProductListComponent},
   { path: 'github', component: GithubSearchComponent},
   { path: 'login', component: LoginComponent},
-  { path: 'cart', component: CartComponent},
   { // load the order routing module --> lazy loading!
     path: 'orders',
     loadChildren: () => import('./orders/orders.module').then(m => m.OrdersModule)
@@ -31,7 +31,8 @@ const routes: Routes = [
       {path: 'dynamic', component: DynamicFormsComponent},
     ]},
   // 404 route
-  { path: '**', component: ErrorPageComponent}
+  { path: 'add-product', component: AddProductComponent, canActivate: [AuthGuard], canDeactivate: [ExitFormGuard]},
+  { path: '**', component: ErrorPageComponent},
 ];
 @NgModule({
   declarations: [],

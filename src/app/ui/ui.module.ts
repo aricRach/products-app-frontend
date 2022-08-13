@@ -11,6 +11,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button';
 import {PipesModule} from '../pipes/pipes.module';
 import {CartModalComponent} from './components/modals/cart-modal/cart-modal.component';
+import { ConfirmModalComponent } from './components/modals/confirm-modal/confirm-modal.component';
 
 
 
@@ -20,6 +21,7 @@ import {CartModalComponent} from './components/modals/cart-modal/cart-modal.comp
     HeaderComponent,
     FooterComponent,
     CounterComponent,
+    ConfirmModalComponent,
   ],
   imports: [
     CommonModule, RouterModule, ReactiveFormsModule,     BrowserModule,

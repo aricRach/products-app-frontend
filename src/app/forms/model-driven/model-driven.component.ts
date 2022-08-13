@@ -10,7 +10,7 @@ import {zipcodeValidator} from '../validators';
 export class ModelDrivenComponent implements OnInit {
 
   userForm = new FormGroup({
-    name: new FormControl('', [Validators.required, Validators.minLength(5)]),
+    name: new FormControl('', [Validators.required, Validators.minLength(2)]),
     age: new FormControl(21, [Validators.required]),
     email: new FormControl(null, {updateOn: 'blur', validators: [Validators.required]}),
     address: new FormGroup({
@@ -22,7 +22,7 @@ export class ModelDrivenComponent implements OnInit {
     {
       updateOn: 'submit'
     }
-    );
+  );
   constructor() { }
 
   ngOnInit(): void {
@@ -33,5 +33,4 @@ export class ModelDrivenComponent implements OnInit {
       console.log('form data', this.userForm.value);
     }
   }
-
 }

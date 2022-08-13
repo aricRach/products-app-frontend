@@ -28,6 +28,7 @@ import {HttpErrorInterceptor} from './services/http-error.interceptor';
 import {NgxsModule} from '@ngxs/store';
 import {CartState} from './cart/cart.state';
 import {PipesModule} from './pipes/pipes.module';
+import { AddProductComponent } from './containers/add-product/add-product.component';
 
 @NgModule({
   declarations: [
@@ -42,20 +43,21 @@ import {PipesModule} from './pipes/pipes.module';
     ErrorPageComponent,
     NumbersOnlyDirective,
     ProductDetailComponent,
+    AddProductComponent,
   ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    ReactiveFormsModule,
-    AppRoutingModule,
-    HttpClientModule,
-    UiModule,
-    SearchModule,
-    CurrencyModule,
-    UserModule,
-    PipesModule,
-    NgxsModule.forRoot([CartState]),
-  ],
+    imports: [
+        BrowserModule,
+        FormsModule,
+        ReactiveFormsModule,
+        AppRoutingModule,
+        HttpClientModule,
+        UiModule,
+        SearchModule,
+        CurrencyModule,
+        UserModule,
+        PipesModule,
+        NgxsModule.forRoot([CartState])
+    ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS, // interface

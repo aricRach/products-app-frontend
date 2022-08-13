@@ -22,6 +22,7 @@ export class HeaderComponent implements OnInit {
     { text: 'github', link: '/github' },
     { text: 'forms', link: '/forms' },
     { text: 'orders', link: '/orders' },
+    { text: 'add product', link: '/add-product' },
   ];
   search = new FormControl();
 
