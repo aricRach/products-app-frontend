@@ -14,7 +14,7 @@ export class ExitFormGuard implements CanDeactivate<any> {
   canDeactivate(component: any, currentRoute: ActivatedRouteSnapshot, currentState: RouterStateSnapshot, nextState?: RouterStateSnapshot):
     Observable<boolean | UrlTree> | boolean {
 
-    if (component.form.dirty) {
+    if (component.form?.dirty) {
       return this.modalsService.openConfirmModal().afterClosed().pipe(map((result: string) => {
         return result === 'exit';
       }, (error: any) => {

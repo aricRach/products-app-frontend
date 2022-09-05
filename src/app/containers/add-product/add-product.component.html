@@ -4,26 +4,34 @@
   <div class="form-group">
     <label>Name</label>
     <input type="text" appUppercase formControlName="name" class="form-control">
-    <div *ngIf="form.get('name')?.touched">
+    <div *ngIf="form?.get('name')?.touched">
       <small *ngIf="form.get('name')?.hasError('required')">Name is required</small>
       <small *ngIf="form.get('name')?.hasError('minlength')">the minimum length is 2</small>
     </div>
     <label>owner</label>
     <input type="text" class="form-control" [readOnly]="true" [value]="owner">
   </div>
-  <div class="form-group">
-    <label>price in {{currencyCode}}</label>
-    <input [min]="0" type="number" formControlName="price" class="form-control">
+
+  <div class="in-row">
+    <div class="form-group">
+      <label>price in {{currencyCode}}</label>
+      <input [min]="0" type="number" formControlName="price" class="form-control">
+    </div>
+
+    <div *ngIf="isInSale" class="form-group">
+      <label>discount in percent</label>
+      <input [max]="100" [min]="0" type="number" formControlName="discountPercent" class="form-control">
+    </div>
+
+    <div class="form-group">
+      <label>Total price in {{currencyCode}}</label>
+      <div>{{totalPrice}}</div>
+    </div>
   </div>
 
   <div class="form-group sale-group">
     <label>in sale: </label>
-    <input class="sale-checkbox" type="checkbox" (change)="toggleIsInSale()">
-  </div>
-
-  <div *ngIf="isInSale" class="form-group">
-    <label>discount in percent</label>
-    <input [max]="100" [min]="0" type="number" formControlName="discountPercent" class="form-control">
+    <input class="sale-checkbox" formControlName="isInSale" type="checkbox" (change)="toggleIsInSale()">
   </div>
 
   <div class="form-group">
@@ -34,4 +42,4 @@
   <button type="submit" class="btn btn-success btn-sm my-4">Submit</button>
 </form>
 
-<pre class="bg-light rounded border p-2 mt-4">{{form.value | json}}</pre>
+<pre class="bg-light rounded border p-2 mt-4">{{form?.value | json}}</pre>

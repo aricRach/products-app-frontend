@@ -31,7 +31,21 @@ const routes: Routes = [
       {path: 'dynamic', component: DynamicFormsComponent},
     ]},
   // 404 route
-  { path: 'add-product', component: AddProductComponent, canActivate: [AuthGuard], canDeactivate: [ExitFormGuard]},
+  {
+    path: 'add-product',
+    component: AddProductComponent,
+    canActivate: [AuthGuard],
+    canDeactivate: [ExitFormGuard]
+  },
+  {
+    path: 'edit-product/:pid',
+    component: AddProductComponent,
+    data: {
+      isEditMode: true
+    },
+    canActivate: [AuthGuard],
+    canDeactivate: [ExitFormGuard]
+  },
   { path: '**', component: ErrorPageComponent},
 ];
 @NgModule({

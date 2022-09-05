@@ -56,25 +56,28 @@ export class ProductListComponent implements OnInit, OnDestroy {
   }
 
   getData(): void {
-    this.productService.getProducts().subscribe(
-      (data: ProductType[]) => {
-        console.log('success', data);
-        this.plist = data;
-        this.plist.map((item: ProductType, index) => {
-          if (index % 2 === 0) {
-            // return {...item, discountPercent: 10};
-            item.discountPercent = 10;
-            return item;
-            // return {...item, discountPercent: 10};
-          }
-          return item;
-        });
-        console.log(this.plist);
-      },
-      (err: any) => {
-        console.log('error', err);
-      }
-    );
+    if (this.productService._allProducts) {
+      this.plist = this.productService._allProducts;
+    } else {
+      this.productService.getProducts().subscribe(
+        (data: ProductType[]) => {
+          data.map((product, index) => {
+            if (index % 2 === 0) {
+              // @ts-ignore
+              product.discountPercent = 10;
+              return product;
+            }
+            return product;
+          });
+          console.log('success', data);
+          this.plist = data;
+          console.log(this.plist);
+        },
+        (err: any) => {
+          console.log('error', err);
+        }
+      );
+    }
   }
 
   addItem(data: CartItem): void {

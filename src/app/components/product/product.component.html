@@ -10,6 +10,7 @@
   </div>
   </div>
   <button class="btn btn-primary btn-sm w-100" (click)="notifyParent()" *ngIf="data.productStock>0; else stock">add to cart</button>
+  <a [routerLink]="['/edit-product', data.productId]" class="btn btn-primary btn-sm w-100">edit</a>
 </div>
 
 <ng-template #stock>

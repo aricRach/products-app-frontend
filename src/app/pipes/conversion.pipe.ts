@@ -9,17 +9,21 @@ export class ConversionPipe implements PipeTransform {
     let val = Number(value);
     switch (code) {
       case 'USD' :
-        return val *= 0.013;
+        val *= 0.013;
         break;
       case 'EUR':
-        return val *= 0.012;
+        val *= 0.012;
+        break;
       case 'GBP':
-        return val *= 0.011;
+        val *= 0.011;
+        break;
       case 'CAD':
-        return val *= 0.017;
+        val *= 0.017;
+        break;
       default:
         return val;
     }
+    return +val.toFixed(2);
   }
 
 }

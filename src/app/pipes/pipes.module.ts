@@ -11,6 +11,9 @@ import { ItemTitlePipe } from './item-title.pipe';
     FilterByPipe,
     ItemTitlePipe,
   ],
+  providers: [
+    ConversionPipe
+  ],
   imports: [
   ],
     exports: [
