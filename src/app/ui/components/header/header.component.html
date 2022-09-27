@@ -24,9 +24,8 @@
           >
         </li>
       </ul>
-      <div>
-        <button (click)="goToCart()">cart</button>
-        <small>{{(cartItems$ | async)?.length}}</small>
+      <div class="me-2">
+        <app-currency></app-currency>
       </div>
       <div class="d-flex" role="search">
         <input
@@ -38,6 +37,11 @@
           aria-label="Search"
         />
       </div>
+      <div>
+        <button (click)="goToCart()">cart</button>
+        <small>{{(cartItems$ | async)?.length}}</small>
+      </div>
+      <app-login-buttons></app-login-buttons>
     </div>
   </div>
 </nav>
