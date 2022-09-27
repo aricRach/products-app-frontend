@@ -18,10 +18,10 @@ const routes: Routes = [
   { path: '', component: ProductListComponent},
   { path: 'github', component: GithubSearchComponent},
   { path: 'login', component: LoginComponent},
-  { // load the order routing module --> lazy loading!
-    path: 'orders',
-    loadChildren: () => import('./orders/orders.module').then(m => m.OrdersModule)
-  },
+  // { // load the order routing module --> lazy loading!
+  //   path: 'orders',
+  //   loadChildren: () => import('./orders/orders.module').then(m => m.OrdersModule)
+  // },
   { path: 'products', component: ProductListComponent},
   { path: 'detail/:pid', component: ProductDetailComponent},
   { path: 'forms', children: [
@@ -52,7 +52,7 @@ const routes: Routes = [
   declarations: [],
   imports: [
     CommonModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes, {scrollPositionRestoration: 'enabled'})
   ],
   exports: [RouterModule]
 })
