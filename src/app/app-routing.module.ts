@@ -15,7 +15,7 @@ import {ExitFormGuard} from './ui/components/modals/exit-form.guard';
 
 
 const routes: Routes = [
-  { path: '', component: ProductListComponent},
+  { path: '', redirectTo: 'products', pathMatch: 'full'},
   { path: 'github', component: GithubSearchComponent},
   { path: 'login', component: LoginComponent},
   // { // load the order routing module --> lazy loading!

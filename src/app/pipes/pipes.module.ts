@@ -3,6 +3,7 @@ import {DiscountPipe} from './discount.pipe';
 import {ConversionPipe} from './conversion.pipe';
 import {FilterByPipe} from './filter-by.pipe';
 import { ItemTitlePipe } from './item-title.pipe';
+import { HighlightSearchResultsPipe } from './highlight-search-results.pipe';
 
 @NgModule({
   declarations: [
@@ -10,6 +11,7 @@ import { ItemTitlePipe } from './item-title.pipe';
     ConversionPipe,
     FilterByPipe,
     ItemTitlePipe,
+    HighlightSearchResultsPipe,
   ],
   providers: [
     ConversionPipe
@@ -17,10 +19,11 @@ import { ItemTitlePipe } from './item-title.pipe';
   imports: [
   ],
     exports: [
-    DiscountPipe,
-    ConversionPipe,
-    FilterByPipe,
-    ItemTitlePipe,
+        DiscountPipe,
+        ConversionPipe,
+        FilterByPipe,
+        ItemTitlePipe,
+        HighlightSearchResultsPipe,
     ]
 })
 export class PipesModule { }

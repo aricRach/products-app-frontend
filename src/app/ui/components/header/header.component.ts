@@ -34,7 +34,9 @@ export class HeaderComponent implements OnInit {
 
   watchValueChanges(): void {
     this.search.valueChanges.subscribe((data: any) => {
-      this.router.navigate(['/products'], { queryParams: { q: data } });
+      data ?
+        this.router.navigate(['/products'], { queryParams: { search: data } }) :
+        this.router.navigate(['/products']);
     });
   }
 

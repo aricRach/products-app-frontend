@@ -2,7 +2,7 @@
   <a [routerLink]="['/detail', data.productId]">
   <img [src]="data.productImage" class="img-thumbnail">
   </a>
-  <h3 class="item-title">{{data.productName | uppercase | itemTitle}}</h3>
+  <h3 [innerHTML]="data.productName | itemTitle | highlightSearchResults : searchTerm  | uppercase " class="item-title">{{data.productName }}</h3>
   <div class="price-details">
   <h4 [ngClass]="{'discount' : data.discountPercent > 0}">{{data.productPrice | conversion:currencyCode | currency: currencyCode}}</h4>
   <div *ngIf="data.discountPercent">
