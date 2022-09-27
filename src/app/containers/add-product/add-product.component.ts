@@ -29,7 +29,7 @@ export class AddProductComponent implements OnInit, OnDestroy {
   get totalPrice(): number {
     const currentPrice = this.form.get('price').value;
     return this.isInSale ? (currentPrice - (currentPrice * this.form.get('discountPercent').value / 100)).toFixed(2) :
-      currentPrice.toFixed(2);
+      currentPrice !== '' ? currentPrice?.toFixed(2) : '';
   }
 
   constructor(private activeRoute: ActivatedRoute,
@@ -40,26 +40,33 @@ export class AddProductComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    if (this.isEditMode) {
-      this.productId = +this.activeRoute.snapshot.paramMap.get('pid');
-      this.currentProduct = this.productService.allProducts.filter((product: ProductType) => {
-        return this.productId === product.productId;
-      })[0];
-      console.log(this.currentProduct);
-      this.isInSale = this.currentProduct.discountPercent > 0;
-    }
-
+    this.setProductItem();
     this.currencySubscription = this.currencyService.currencyObservable.subscribe((newCode: string) => {
-      this.currencyCode = newCode;
-      this.form?.patchValue({
-        price: this.conversionPipe.transform(this.currentProduct.productPrice, this.currencyCode)
-      });
+      this.setNewCurrencyCode(newCode);
     });
     this.ownerSubscription = this.userService.userObservable.subscribe((user) => {
       this.owner = user.email;
     });
     this.initializeForm();
+  }
 
+  private setProductItem(): void {
+    if (this.isEditMode) {
+      this.productId = +this.activeRoute.snapshot.paramMap.get('pid');
+      this.currentProduct = this.productService.allProducts.filter((product: ProductType) => {
+        return this.productId === product.productId;
+      })[0];
+      this.isInSale = this.currentProduct.discountPercent > 0;
+    }
+  }
+
+  private setNewCurrencyCode(newCode: string): void {
+    this.currencyCode = newCode;
+    if (this.isEditMode) {
+      this.form?.patchValue({
+        price: this.conversionPipe.transform(this.currentProduct.productPrice, this.currencyCode)
+      });
+    }
   }
 
   initializeForm(): void {
