@@ -1,6 +1,5 @@
 import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
 import {ProductType} from '../../../types';
-import {CurrencyService} from '../../currency/currency.service';
 
 @Component({
   selector: 'app-product',
@@ -13,18 +12,13 @@ export class ProductComponent implements OnInit {
 
   @Output() btnClicked = new EventEmitter();
   @Input() currencyCode = 'INR';
-  constructor(private currencyService: CurrencyService) { }
+  @Input() searchTerm: string;
 
-  ngOnInit(): void {
-    // this.currencyService.currencyObservable.subscribe((newCode: string) => {
-    //   this.currencyCode = newCode;
-    // });
-  }
+  constructor() { }
+
+  ngOnInit(): void {}
 
   notifyParent(): void {
-    this.btnClicked.emit({
-      id: this.data.productId,
-      name: this.data.productName
-    });
+    this.btnClicked.emit(this.data);
   }
 }
