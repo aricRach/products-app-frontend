@@ -13,7 +13,6 @@ import {CartItem} from '../../cart/models/cart-item.model';
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.css'],
-  providers: [ProductService]
 })
 export class ProductListComponent implements OnInit, OnDestroy {
 
@@ -56,9 +55,6 @@ export class ProductListComponent implements OnInit, OnDestroy {
   }
 
   getData(): void {
-    if (this.productService._allProducts) {
-      this.plist = this.productService._allProducts;
-    } else {
       this.productService.getProducts().subscribe(
         (data: ProductType[]) => {
           data.map((product, index) => {
@@ -77,7 +73,6 @@ export class ProductListComponent implements OnInit, OnDestroy {
           console.log('error', err);
         }
       );
-    }
   }
 
   addItem(data: CartItem): void {
