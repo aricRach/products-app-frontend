@@ -10,9 +10,7 @@ export class HighlightSearchResultsPipe implements PipeTransform {
     if (!searchTerm) {
       return value;
     }
-    // const result = new RegExp(searchTerm, 'gi');
-    // return value.replace(result, '<mark>$&</mark>');
-    return value.replace(searchTerm, `<span class="aric">${searchTerm}</span>`);
+    return value.replace(new RegExp(searchTerm, 'gi'), `<span class="highlight">${searchTerm}</span>`);
   }
 
 }
