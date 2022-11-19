@@ -8,7 +8,7 @@ export class AddToCart {
 
 export class RemoveFromCart {
   static readonly type = '[Product List] Remove from cart';
-  constructor(public productId: number) {}
+  constructor(public id: number) {}
 }
 
 export class EmptyCart {

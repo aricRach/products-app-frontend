@@ -21,8 +21,8 @@ export class CartState {
     let totalPrice = 0;
     for (const item of state.cartItems) {
       console.log(item);
-      totalPrice += item.discountPercent > 0 ? (item.productPrice - item.productPrice * (item.discountPercent / 100)) * item.numberOfItems
-        : item.productPrice * item.numberOfItems;
+      totalPrice += item.discountPercent > 0 ? (item.price - item.price * (item.discountPercent / 100)) * item.numberOfItems
+        : item.price * item.numberOfItems;
     }
     return totalPrice;
   }
@@ -36,7 +36,7 @@ export class CartState {
   addProduct(ctx: StateContext<CartStateModel>, action: AddToCart): void {
     const state = ctx.getState();
     const isAlreadyExist = state.cartItems.some((item: CartItem) => {
-      return item.productId === action.payload.productId;
+      return item.id === action.payload.id;
     });
     if (!isAlreadyExist) {
       if (action.payload.numberOfItems == null) {
@@ -55,7 +55,7 @@ export class CartState {
     const state = ctx.getState();
     ctx.patchState({
       cartItems: state.cartItems.filter((item: CartItem) => {
-          return item.productId !== action.productId;
+          return item.id !== action.id;
       })
     });
   }
@@ -70,7 +70,7 @@ export class CartState {
     const state = ctx.getState();
     ctx.patchState({
       cartItems: [...state.cartItems.map((item: CartItem) => {
-        if (item.productId === action.payload.productId) {
+        if (item.id === action.payload.id) {
           return {...item, numberOfItems: item.numberOfItems + 1};
         }
         return item;
@@ -83,7 +83,7 @@ export class CartState {
     const state = ctx.getState();
     ctx.patchState({
       cartItems: [...state.cartItems.map((item: CartItem) => {
-        if (item.productId === action.payload.productId) {
+        if (item.id === action.payload.id) {
           return {...item, numberOfItems: item.numberOfItems > 0 ? item.numberOfItems - 1 : 0};
         }
         return item;

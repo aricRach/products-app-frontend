@@ -1,5 +1,5 @@
 export interface CounterAction {
   actionType: string;
-  productId: number;
+  id: number;
   numberOfItems: number;
 }

@@ -8,7 +8,7 @@ import {CounterAction} from './counter-action.model';
 })
 export class CounterComponent implements OnInit {
 
-  @Input() productId: number;
+  @Input() id: number;
 
   @Output() counterClicked = new EventEmitter();
 
@@ -20,7 +20,7 @@ export class CounterComponent implements OnInit {
 
   onCounterClicked(action: string): void {
     this.counterClicked.emit({
-      productId: this.productId,
+      id: this.id,
       actionType: action,
       numberOfItems: this.numberOfItems
     });

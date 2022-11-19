@@ -39,14 +39,6 @@ export class ProductListComponent implements OnInit {
   getData(): void {
       this.productService.getProducts().subscribe(
         (data: ProductType[]) => {
-          data.map((product, index) => {
-            if (index % 2 === 0) {
-              // @ts-ignore
-              product.discountPercent = 10;
-              return product;
-            }
-            return product;
-          });
           console.log('success', data);
           this.plist = data;
           console.log(this.plist);

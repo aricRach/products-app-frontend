@@ -47,7 +47,7 @@ export class CartModalComponent implements OnInit, OnDestroy {
   }
 
   removeFromCart(item: CartItem): void {
-    this.store.dispatch(new RemoveFromCart(item.productId));
+    this.store.dispatch(new RemoveFromCart(item.id));
   }
 
   onCounterClicked(action: CounterAction): void {
@@ -55,7 +55,7 @@ export class CartModalComponent implements OnInit, OnDestroy {
       this.store.dispatch(new IncreaseItems(action));
     } else {
       if (action.numberOfItems === 1) {
-        this.store.dispatch(new RemoveFromCart(action.productId));
+        this.store.dispatch(new RemoveFromCart(action.id));
         if (this.isCartEmpty) {
           this.dialog.close();
         }

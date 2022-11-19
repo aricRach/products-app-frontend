@@ -5,18 +5,18 @@
 
 <div *ngIf="!isCartEmpty; else cartEmpty" mat-dialog-content>
   <div class="cart-item"  *ngFor="let item of (cartItems$ | async)">
-      <img [src]=item.productImage>
+      <img [src]=item.image>
       <div class="central-item-details">
-        <h6>{{item.productName}}</h6>
+        <h6>{{item.name}}</h6>
         <div class="in-row">
-        <h6 [ngClass]="{'discount prev' : item.discountPercent > 0}">{{item.productPrice | conversion:currencyCode | currency: currencyCode}}</h6>
+        <h6 [ngClass]="{'discount prev' : item.discountPercent > 0}">{{item.price | conversion:currencyCode | currency: currencyCode}}</h6>
         <div class="discount-cart-item" *ngIf="item.discountPercent">
-          <h6>{{item.productPrice | calculateDiscount: item.discountPercent | conversion:currencyCode | currency: currencyCode}}</h6>
+          <h6>{{item.price | calculateDiscount: item.discountPercent | conversion:currencyCode | currency: currencyCode}}</h6>
         </div>
         </div>
         <button (click)="removeFromCart(item)">delete</button>
       </div>
-      <app-counter [productId]="item.productId" (counterClicked)="onCounterClicked($event)" [numberOfItems]="item.numberOfItems"></app-counter>
+      <app-counter [id]="item.id" (counterClicked)="onCounterClicked($event)" [numberOfItems]="item.numberOfItems"></app-counter>
   </div>
 </div>
 

@@ -10,7 +10,8 @@ import {map} from 'rxjs/operators';
 // @Injectable() // service is locally
 export class ProductService {
 
-  private url = 'https://raw.githubusercontent.com/mdmoin7/Random-Products-Json-Generator/master/products.json';
+  // private url = 'https://raw.githubusercontent.com/mdmoin7/Random-Products-Json-Generator/master/products.json';
+  private url = 'http://localhost:8082/api/v1/product';
 
   // tslint:disable-next-line:variable-name
   _allProducts: ProductType[];
@@ -24,18 +25,15 @@ export class ProductService {
   }
 
   getProducts(): Observable<ProductType[]> {
+    // this.http.get<any>('http://localhost:8082/api/v1/product').subscribe((newPr) => {
+    //   console.log(newPr);
+    // });
+    // return this.http.get<ProductType[]>(this.url);
     return this.http.get<ProductType[]>(this.url);
   }
 
   private setAllProducts(): void {
-    this.http.get<ProductType[]>(this.url).pipe(map((products: ProductType[]) => {
-      return products.map((product, index) => {
-        if (index % 2 === 0) {
-          return {...product, discountPercent: 10 };
-        }
-        return product;
-      });
-    })).subscribe((products: ProductType[]) => {
+    this.http.get<ProductType[]>(this.url).subscribe((products: ProductType[]) => {
       this._allProducts = products;
     });
   }

@@ -29,10 +29,10 @@ export class HeaderComponent implements OnInit {
   constructor(private router: Router, private modalsService: ModalsService) {}
 
   ngOnInit(): void {
-    this.watchValueChanges();
+    this.watchSearchValueChanges();
   }
 
-  watchValueChanges(): void {
+  watchSearchValueChanges(): void {
     this.search.valueChanges.subscribe((data: any) => {
       data ?
         this.router.navigate(['/products'], { queryParams: { search: data } }) :
@@ -41,7 +41,6 @@ export class HeaderComponent implements OnInit {
   }
 
   goToCart(): void {
-    // this.router.navigate(['cart']);
     this.modalsService.openCartModal();
   }
 }
