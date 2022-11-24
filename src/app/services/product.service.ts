@@ -32,7 +32,7 @@ export class ProductService {
     return this.http.get<ProductType[]>(this.url);
   }
 
-  private setAllProducts(): void {
+   setAllProducts(): void {
     this.http.get<ProductType[]>(this.url).subscribe((products: ProductType[]) => {
       this._allProducts = products;
     });

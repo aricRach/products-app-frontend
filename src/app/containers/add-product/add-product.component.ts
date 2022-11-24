@@ -46,6 +46,7 @@ export class AddProductComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.productService.setAllProducts();
     this.setProductItem();
     this.currencySubscription = this.currencyService.currencyObservable.subscribe((newCode: string) => {
       this.setNewCurrencyCode(newCode);
@@ -93,7 +94,7 @@ export class AddProductComponent implements OnInit, OnDestroy {
     if (this.form.valid) {
       const product = {
         name: this.form.get('name').value,
-        price: this.form.get('price').value,
+        price: this.conversionPipe.transform(this.form.get('price').value, this.currencyCode, true),
         discountPercent: this.form.get('isInSale').value ? this.form.get('discountPercent').value : 0,
         stock: this.form.get('stock').value,
         userOwner: {
@@ -125,7 +126,7 @@ export class AddProductComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.currencySubscription.unsubscribe();
-    this.ownerSubscription.unsubscribe();
+    this.currencySubscription?.unsubscribe();
+    this.ownerSubscription?.unsubscribe();
   }
 }

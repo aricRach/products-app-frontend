@@ -5,25 +5,52 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class ConversionPipe implements PipeTransform {
 
-  transform(value: number|string, code: string): number {
+  cad = 60.99;
+  gbp = 96.99;
+  euro = 83.97;
+  usd  = 81.71;
+
+  transform(value: number|string, code: string, toInr?: boolean): number {
     let val = Number(value);
     switch (code) {
       case 'USD' :
-        val *= 0.013;
+        toInr ? val *= this.usd : val *= 1 / this.usd;
         break;
       case 'EUR':
-        val *= 0.012;
+        toInr ? val *= this.euro : val *= 1 / this.euro;
         break;
       case 'GBP':
-        val *= 0.011;
+        toInr ? val *= this.gbp : val *= 1 / this.gbp;
         break;
       case 'CAD':
-        val *= 0.017;
+        toInr ? val *= this.cad : val *= 1 / this.cad;
         break;
       default:
         return val;
     }
     return +val.toFixed(2);
   }
+  //
+  // // tslint:disable-next-line:typedef
+  // convertToInr(value: number|string, code: string) {
+  //   let val = Number(value);
+  //   switch (code) {
+  //     case 'USD' :
+  //       val *= this.usd;
+  //       break;
+  //     case 'EUR':
+  //       val *= this.euro;
+  //       break;
+  //     case 'GBP':
+  //       val *= this.gbp;
+  //       break;
+  //     case 'CAD':
+  //       val *= this.cad;
+  //       break;
+  //     default:
+  //       return val;
+  //   }
+  //   return +val;
+  // }
 
 }
