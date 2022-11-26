@@ -26,5 +26,5 @@
 
 <div mat-dialog-actions>
   <button mat-button mat-dialog-close>exit</button>
-  <button mat-button mat-dialog-close="'approve'" color="primary" cdkFocusInitial>approve</button>
+  <button mat-button mat-dialog-close="'approve'" (click)="onApproveClicked()" color="primary" cdkFocusInitial>approve</button>
 </div>

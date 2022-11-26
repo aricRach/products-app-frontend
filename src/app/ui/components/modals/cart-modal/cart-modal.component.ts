@@ -5,8 +5,9 @@ import {CartState} from '../../../../cart/cart.state';
 import {Observable, Subscription} from 'rxjs';
 import {CartItem} from '../../../../cart/models/cart-item.model';
 import {CurrencyService} from '../../../../currency/currency.service';
-import {DecreaseItems, IncreaseItems, RemoveFromCart} from '../../../../cart/cart-actions.actions';
+import {DecreaseItems, EmptyCart, IncreaseItems, RemoveFromCart} from '../../../../cart/cart-actions.actions';
 import {CounterAction} from '../../counter/counter-action.model';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 
 @Component({
   selector: 'app-cart-modal',
@@ -15,21 +16,26 @@ import {CounterAction} from '../../counter/counter-action.model';
 })
 export class CartModalComponent implements OnInit, OnDestroy {
 
+  private url = 'http://localhost:8082/api/v1/product/buy';
+
   currencyCode: string;
   isCartEmpty: boolean;
 
   subscriber = new Subscription();
+
+  private cartItems: CartItem[];
 
   @Select(CartState.getCartItems) cartItems$: Observable<Array<CartItem>> | undefined;
   @Select(CartState.getCartTotalPrice) cartItemsTotalPrice$: Observable<number> | undefined;
   @Select(CartState.isCartEmpty) isCartEmpty$: Observable<boolean>;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, private dialog: MatDialogRef<any>,
-              private currencyService: CurrencyService, private store: Store) { }
+              private currencyService: CurrencyService, private store: Store, private http: HttpClient) { }
 
   ngOnInit(): void {
     this.getCurrency();
     this.getCartStatus();
+    this.getCartItems();
   }
 
   private getCurrency(): void {
@@ -39,11 +45,19 @@ export class CartModalComponent implements OnInit, OnDestroy {
   }
 
   private getCartStatus(): void {
-    this.subscriber = this.isCartEmpty$.subscribe((isEmpty: boolean) => {
+    const isEmptySubscriber = this.isCartEmpty$.subscribe((isEmpty: boolean) => {
       if (isEmpty) {
         this.isCartEmpty = isEmpty;
       }
     });
+    this.subscriber.add(isEmptySubscriber);
+  }
+
+  private getCartItems(): void {
+    const cartItemsSubscriber = this.cartItems$.subscribe((data: CartItem[]) => {
+      this.cartItems = data;
+    });
+    this.subscriber.add(cartItemsSubscriber);
   }
 
   removeFromCart(item: CartItem): void {
@@ -63,6 +77,15 @@ export class CartModalComponent implements OnInit, OnDestroy {
         this.store.dispatch(new DecreaseItems(action));
       }
     }
+  }
+
+  onApproveClicked(): any {
+      this.http.post(this.url, this.cartItems).subscribe(() => {
+        this.store.dispatch(new EmptyCart());
+        // todo: invoke event in order to reload the data in products list component
+    }, (err: HttpErrorResponse) => {
+        console.log(err.error.message);
+      });
   }
 
   ngOnDestroy(): void {
