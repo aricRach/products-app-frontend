@@ -8,6 +8,7 @@ import {CurrencyService} from '../../../../currency/currency.service';
 import {DecreaseItems, EmptyCart, IncreaseItems, RemoveFromCart} from '../../../../cart/cart-actions.actions';
 import {CounterAction} from '../../counter/counter-action.model';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import {ProductService} from '../../../../services/product.service';
 
 @Component({
   selector: 'app-cart-modal',
@@ -30,7 +31,8 @@ export class CartModalComponent implements OnInit, OnDestroy {
   @Select(CartState.isCartEmpty) isCartEmpty$: Observable<boolean>;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, private dialog: MatDialogRef<any>,
-              private currencyService: CurrencyService, private store: Store, private http: HttpClient) { }
+              private currencyService: CurrencyService, private store: Store, private http: HttpClient,
+              private productService: ProductService) { }
 
   ngOnInit(): void {
     this.getCurrency();
@@ -82,7 +84,7 @@ export class CartModalComponent implements OnInit, OnDestroy {
   onApproveClicked(): any {
       this.http.post(this.url, this.cartItems).subscribe(() => {
         this.store.dispatch(new EmptyCart());
-        // todo: invoke event in order to reload the data in products list component
+        this.productService.dataChanged();
     }, (err: HttpErrorResponse) => {
         console.log(err.error.message);
         // todo: create an error message
