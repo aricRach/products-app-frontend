@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ProductType} from '../../../types';
+import {Product} from '../../../types';
 import {ProductService} from '../../services/product.service';
 import {FormControl} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -16,7 +16,7 @@ import {CartItem} from '../../cart/models/cart-item.model';
 })
 export class ProductListComponent implements OnInit {
 
-  plist: ProductType[] = [];
+  plist: Product[] = [];
   search = new FormControl();
   selectedCode!: string;
   currencyCode$!: Observable<string>; // option 3 async pipe
@@ -38,7 +38,7 @@ export class ProductListComponent implements OnInit {
 
   getData(): void {
       this.productService.getProducts().subscribe(
-        (data: ProductType[]) => {
+        (data: Product[]) => {
           console.log('success', data);
           this.plist = data;
           console.log(this.plist);

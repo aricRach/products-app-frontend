@@ -1,5 +1,5 @@
 import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
-import {ProductType} from '../../../types';
+import {Product} from '../../../types';
 
 @Component({
   selector: 'app-product',
@@ -8,7 +8,7 @@ import {ProductType} from '../../../types';
 })
 export class ProductComponent implements OnInit {
 
-  @Input() data!: ProductType;
+  @Input() data!: Product;
 
   @Output() btnClicked = new EventEmitter();
   @Input() currencyCode = 'INR';

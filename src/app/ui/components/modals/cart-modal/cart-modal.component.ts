@@ -85,6 +85,7 @@ export class CartModalComponent implements OnInit, OnDestroy {
         // todo: invoke event in order to reload the data in products list component
     }, (err: HttpErrorResponse) => {
         console.log(err.error.message);
+        // todo: create an error message
       });
   }
 

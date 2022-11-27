@@ -1,11 +1,5 @@
-export interface CartItem {
-  id: number;
-  image: string;
-  name: string;
-  price: number;
-  productSalePrice: string;
-  stock: number;
-  rating: number;
+import {Product} from '../../../types';
+
+export interface CartItem extends Product{
   numberOfItems: number;
-  discountPercent: number;
 }

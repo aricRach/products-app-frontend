@@ -1,5 +1,5 @@
-import {CartItem} from './models/cart-item.model';
 import {CounterAction} from '../ui/components/counter/counter-action.model';
+import {CartItem} from './models/cart-item.model';
 
 export class AddToCart {
   static readonly type = '[Product List] Add to cart';

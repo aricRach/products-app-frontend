@@ -11,7 +11,7 @@
         <div class="in-row">
         <h6 [ngClass]="{'discount prev' : item.discountPercent > 0}">{{item.price | conversion:currencyCode | currency: currencyCode}}</h6>
         <div class="discount-cart-item" *ngIf="item.discountPercent">
-          <h6>{{item.price | calculateDiscount: item.discountPercent | conversion:currencyCode | currency: currencyCode}}</h6>
+          <h6>{{item.finalPrice | conversion:currencyCode | currency: currencyCode}}</h6>
         </div>
         </div>
         <button (click)="removeFromCart(item)">delete</button>

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {ProductType} from '../../types';
+import {Product} from '../../types';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 
@@ -14,26 +14,26 @@ export class ProductService {
   private url = 'http://localhost:8082/api/v1/product';
 
   // tslint:disable-next-line:variable-name
-  _allProducts: ProductType[];
+  _allProducts: Product[];
 
   constructor(private http: HttpClient) {
     this.setAllProducts();
   }
 
-  get allProducts(): ProductType[] {
+  get allProducts(): Product[] {
     return this._allProducts || [];
   }
 
-  getProducts(): Observable<ProductType[]> {
+  getProducts(): Observable<Product[]> {
     // this.http.get<any>('http://localhost:8082/api/v1/product').subscribe((newPr) => {
     //   console.log(newPr);
     // });
     // return this.http.get<ProductType[]>(this.url);
-    return this.http.get<ProductType[]>(this.url);
+    return this.http.get<Product[]>(this.url);
   }
 
    setAllProducts(): void {
-    this.http.get<ProductType[]>(this.url).subscribe((products: ProductType[]) => {
+    this.http.get<Product[]>(this.url).subscribe((products: Product[]) => {
       this._allProducts = products;
     });
   }

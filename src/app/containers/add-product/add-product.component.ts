@@ -5,7 +5,7 @@ import {CurrencyService} from '../../currency/currency.service';
 import {UserService} from '../../user/user.service';
 import {Subscription} from 'rxjs';
 import {ProductService} from '../../services/product.service';
-import {ProductType} from '../../../types';
+import {Product} from '../../../types';
 import {ConversionPipe} from '../../pipes/conversion.pipe';
 import {HttpClient} from '@angular/common/http';
 
@@ -19,7 +19,7 @@ export class AddProductComponent implements OnInit, OnDestroy {
   private ownerSubscription: Subscription;
   private currencySubscription: Subscription;
   private id: number;
-  private currentProduct: ProductType;
+  private currentProduct: Product;
 
   form: FormGroup;
   owner: string;
@@ -60,7 +60,7 @@ export class AddProductComponent implements OnInit, OnDestroy {
   private setProductItem(): void {
     if (this.isEditMode) {
       this.id = +this.activeRoute.snapshot.paramMap.get('pid');
-      this.currentProduct = this.productService.allProducts.filter((product: ProductType) => {
+      this.currentProduct = this.productService.allProducts.filter((product: Product) => {
         return this.id === product.id;
       })[0];
       this.isInSale = this.currentProduct.discountPercent > 0;
