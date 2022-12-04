@@ -5,5 +5,6 @@ export type Product = {
   price: number;
   stock: number;
   discountPercent: number,
-  finalPrice: number
+  finalPrice: number,
+  date?: Date
 };

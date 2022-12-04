@@ -12,6 +12,7 @@ import {LoginComponent} from './user/login/login.component';
 import {AuthGuard} from './user/auth.guard';
 import {AddProductComponent} from './containers/add-product/add-product.component';
 import {ExitFormGuard} from './ui/components/modals/exit-form.guard';
+import {OrdersComponent} from './containers/orders/orders.component';
 
 
 const routes: Routes = [
@@ -24,6 +25,7 @@ const routes: Routes = [
   // },
   { path: 'products', component: ProductListComponent},
   { path: 'detail/:pid', component: ProductDetailComponent},
+  { path: 'orders', component: OrdersComponent},
   { path: 'forms', children: [
       {path: '', redirectTo: 'model', pathMatch: 'full'},
       {path: 'model', component: ModelDrivenComponent, canActivate: [AuthGuard]},

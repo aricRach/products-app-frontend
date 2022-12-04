@@ -1,0 +1,11 @@
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  margin: 2%;
+}
+
+.title {
+  text-align: center;
+  margin-top: 1%;
+  margin-bottom: 3%;
+}

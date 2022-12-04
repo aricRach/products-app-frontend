@@ -24,6 +24,7 @@ import {NgxsModule} from '@ngxs/store';
 import {CartState} from './cart/cart.state';
 import {PipesModule} from './pipes/pipes.module';
 import { AddProductComponent } from './containers/add-product/add-product.component';
+import { OrdersComponent } from './containers/orders/orders.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { AddProductComponent } from './containers/add-product/add-product.compon
     NumbersOnlyDirective,
     ProductDetailComponent,
     AddProductComponent,
+    OrdersComponent,
   ],
     imports: [
         BrowserModule,
