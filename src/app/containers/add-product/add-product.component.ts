@@ -2,7 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {CurrencyService} from '../../currency/currency.service';
-import {UserService} from '../../user/user.service';
+import {UserService} from '../../user/services/user.service';
 import {Subscription} from 'rxjs';
 import {ProductService} from '../../services/product.service';
 import {Product} from '../../../types';

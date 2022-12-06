@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {environment} from '../../environments/environment';
+import {environment} from '../../../environments/environment';
 import {BehaviorSubject, Observable} from 'rxjs';
-import {User} from './user.model';
+import {User} from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +20,12 @@ export class UserService {
 
   login(email: string, password: string): Observable<any> {
     const url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${environment.apiKey}`;
+    const data = {email, password, returnSecureToken: true};
+    return this.httpClient.post(url, data);
+  }
+
+  signUpFireBase(email: string, password: string): Observable<any> {
+    const url = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${environment.apiKey}`;
     const data = {email, password, returnSecureToken: true};
     return this.httpClient.post(url, data);
   }

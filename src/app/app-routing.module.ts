@@ -13,12 +13,14 @@ import {AuthGuard} from './user/auth.guard';
 import {AddProductComponent} from './containers/add-product/add-product.component';
 import {ExitFormGuard} from './ui/components/modals/exit-form.guard';
 import {OrdersComponent} from './containers/orders/orders.component';
+import {SignupComponent} from './user/signup/signup.component';
 
 
 const routes: Routes = [
   { path: '', redirectTo: 'products', pathMatch: 'full'},
   { path: 'github', component: GithubSearchComponent},
-  { path: 'login', component: LoginComponent},
+  { path: 'login', component: LoginComponent}, // guard not loggedin
+  { path: 'signup', component: SignupComponent}, // guard not loggedin
   // { // load the order routing module --> lazy loading!
   //   path: 'orders',
   //   loadChildren: () => import('./orders/orders.module').then(m => m.OrdersModule)
