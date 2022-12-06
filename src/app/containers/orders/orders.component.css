@@ -4,6 +4,10 @@
   margin: 2%;
 }
 
+.grid-header {
+  color: orange;
+}
+
 .title {
   text-align: center;
   margin-top: 1%;

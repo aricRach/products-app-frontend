@@ -98,9 +98,8 @@ export class AddProductComponent implements OnInit, OnDestroy {
         discountPercent: this.form.get('isInSale').value ? this.form.get('discountPercent').value : 0,
         stock: this.form.get('stock').value,
         userOwner: {
-          name: 'aric',
-          userName: 'aricRach',
-          email: 'aricrachmany@gmail.com'
+          userName: this.userService.getUser().userName,
+          email: this.userService.getUser().email
         }
       };
       if (this.isEditMode) {

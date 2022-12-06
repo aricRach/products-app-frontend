@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {BehaviorSubject, Observable} from 'rxjs';
+import {User} from './user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ import {BehaviorSubject, Observable} from 'rxjs';
 export class UserService {
 
   // tslint:disable-next-line:variable-name
-  private _user: any = {};
+  private _user = {} as User;
   private userSubject = new BehaviorSubject(this._user);
   userObservable: Observable<any>;
   constructor(private httpClient: HttpClient) {
@@ -43,5 +44,9 @@ export class UserService {
       this._user = JSON.parse(localStorage.getItem('user') as any);
       this.userSubject.next(this._user);
     }
+  }
+
+  public getUser(): User {
+    return this._user;
   }
 }

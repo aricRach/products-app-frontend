@@ -25,7 +25,7 @@ const routes: Routes = [
   // },
   { path: 'products', component: ProductListComponent},
   { path: 'detail/:pid', component: ProductDetailComponent},
-  { path: 'orders', component: OrdersComponent},
+  { path: 'orders', component: OrdersComponent, canActivate: [AuthGuard]},
   { path: 'forms', children: [
       {path: '', redirectTo: 'model', pathMatch: 'full'},
       {path: 'model', component: ModelDrivenComponent, canActivate: [AuthGuard]},

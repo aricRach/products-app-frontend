@@ -1,8 +1,17 @@
 <h1 class="title">Orders History</h1>
+<div class="grid-container grid-header">
+  <h5>img</h5>
+  <h5>name</h5>
+  <h5>quantity</h5>
+  <h5>total price</h5>
+  <h5>date</h5>
+</div>
+
 <div *ngFor="let order of orders">
     <div class="grid-container">
       <img width="100" height="100" [src]="order.image">
       <h3>{{order.name}}</h3>
+      <h3>{{order.numberOfItems}}</h3>
       <h3>{{order.finalPrice}}</h3>
       <h3>{{order.date | date}}</h3>
     </div>
