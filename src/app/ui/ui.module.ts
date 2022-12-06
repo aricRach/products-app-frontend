@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HeaderComponent } from './components/header/header.component';
+import { HeaderComponent } from './components/header-components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
@@ -14,6 +14,9 @@ import {CartModalComponent} from './components/modals/cart-modal/cart-modal.comp
 import { ConfirmModalComponent } from './components/modals/confirm-modal/confirm-modal.component';
 import {CurrencyModule} from '../currency/currency.module';
 import {UserModule} from '../user/user.module';
+import { NavigationBarComponent } from './components/header-components/navigation-bar/navigation-bar.component';
+import { SearchComponent } from './components/header-components/search/search.component';
+import { CartButtonsComponent } from './components/header-components/cart-buttons/cart-buttons.component';
 
 
 
@@ -24,6 +27,9 @@ import {UserModule} from '../user/user.module';
     FooterComponent,
     CounterComponent,
     ConfirmModalComponent,
+    NavigationBarComponent,
+    SearchComponent,
+    CartButtonsComponent,
   ],
   imports: [
     CommonModule, RouterModule, ReactiveFormsModule, BrowserModule,

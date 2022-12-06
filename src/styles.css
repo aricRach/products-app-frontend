@@ -16,3 +16,7 @@
 .HIGHLIGHT {
   color: yellowgreen;
 }
+
+.active{
+  background-color: white;
+}
