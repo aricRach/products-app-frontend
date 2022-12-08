@@ -9,6 +9,8 @@ import {DecreaseItems, EmptyCart, IncreaseItems, RemoveFromCart} from '../../../
 import {CounterAction} from '../../counter/counter-action.model';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {ProductService} from '../../../../services/product.service';
+import {UserService} from '../../../../user/services/user.service';
+import {Cart} from '../../../../cart/models/cart.model';
 
 @Component({
   selector: 'app-cart-modal',
@@ -24,7 +26,7 @@ export class CartModalComponent implements OnInit, OnDestroy {
 
   subscriber = new Subscription();
 
-  private cartItems: CartItem[];
+  private cart: Cart;
 
   @Select(CartState.getCartItems) cartItems$: Observable<Array<CartItem>> | undefined;
   @Select(CartState.getCartTotalPrice) cartItemsTotalPrice$: Observable<number> | undefined;
@@ -32,7 +34,9 @@ export class CartModalComponent implements OnInit, OnDestroy {
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, private dialog: MatDialogRef<any>,
               private currencyService: CurrencyService, private store: Store, private http: HttpClient,
-              private productService: ProductService) { }
+              private productService: ProductService, private userService: UserService) {
+    this.cart = {} as Cart;
+  }
 
   ngOnInit(): void {
     this.getCurrency();
@@ -57,7 +61,7 @@ export class CartModalComponent implements OnInit, OnDestroy {
 
   private getCartItems(): void {
     const cartItemsSubscriber = this.cartItems$.subscribe((data: CartItem[]) => {
-      this.cartItems = data;
+      this.cart.cartItems = data;
     });
     this.subscriber.add(cartItemsSubscriber);
   }
@@ -82,7 +86,8 @@ export class CartModalComponent implements OnInit, OnDestroy {
   }
 
   onApproveClicked(): any {
-      this.http.post(this.url, this.cartItems).subscribe(() => {
+    this.cart.buyerEmail = this.userService.getUser().email;
+    this.http.post(this.url, this.cart).subscribe(() => {
         this.store.dispatch(new EmptyCart());
         this.productService.dataChanged();
     }, (err: HttpErrorResponse) => {
