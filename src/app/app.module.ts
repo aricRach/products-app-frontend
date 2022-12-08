@@ -24,7 +24,7 @@ import {NgxsModule} from '@ngxs/store';
 import {CartState} from './cart/cart.state';
 import {PipesModule} from './pipes/pipes.module';
 import { AddProductComponent } from './containers/add-product/add-product.component';
-import { OrdersComponent } from './containers/orders/orders.component';
+import { OrdersComponent } from './containers/orders-history/components/orders/orders.component';
 
 @NgModule({
   declarations: [

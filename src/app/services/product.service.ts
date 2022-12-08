@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
 import {Product} from '../../types';
 import {BehaviorSubject, Observable} from 'rxjs';
+import {ProductApiService} from './product-api.service';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +19,7 @@ export class ProductService {
   // tslint:disable-next-line:variable-name
   _allProducts: Product[];
 
-  constructor(private http: HttpClient) {
+  constructor(private productApiService: ProductApiService) {
     this.setAllProducts();
     this.dataChangedObservable = this.dataChangedSubject.asObservable();
   }
@@ -33,15 +33,11 @@ export class ProductService {
   }
 
   getProducts(): Observable<Product[]> {
-    // this.http.get<any>('http://localhost:8082/api/v1/product').subscribe((newPr) => {
-    //   console.log(newPr);
-    // });
-    // return this.http.get<ProductType[]>(this.url);
-    return this.http.get<Product[]>(this.url);
+    return this.productApiService.getProducts();
   }
 
    setAllProducts(): void {
-    this.http.get<Product[]>(this.url).subscribe((products: Product[]) => {
+    this.productApiService.getProducts().subscribe((products: Product[]) => {
       this._allProducts = products;
     });
   }

@@ -1,5 +1,6 @@
 import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
 import {Product} from '../../../types';
+import {User} from '../../user/models/user.model';
 
 @Component({
   selector: 'app-product',
@@ -9,6 +10,7 @@ import {Product} from '../../../types';
 export class ProductComponent implements OnInit {
 
   @Input() data!: Product;
+  @Input() userAuthenticated: User;
 
   @Output() btnClicked = new EventEmitter();
   @Input() currencyCode = 'INR';

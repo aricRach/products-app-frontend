@@ -8,6 +8,8 @@ import {Observable, Subscription} from 'rxjs';
 import {Store} from '@ngxs/store';
 import {AddToCart} from '../../cart/cart-actions.actions';
 import {CartItem} from '../../cart/models/cart-item.model';
+import {UserService} from '../../user/services/user.service';
+import {User} from '../../user/models/user.model';
 
 @Component({
   selector: 'app-product-list',
@@ -21,13 +23,16 @@ export class ProductListComponent implements OnInit, OnDestroy {
   selectedCode!: string;
   currencyCode$!: Observable<string>; // option 3 async pipe
   subscriber = new Subscription();
+  userAuthenticated: User;
   constructor(private productService: ProductService, private activeRoute: ActivatedRoute,
-              private router: Router, private currencyService: CurrencyService, private store: Store) {
+              private router: Router, private currencyService: CurrencyService, private store: Store, private userService: UserService) {
     this.currencyCode$ = this.currencyService.currencyObservable;   // option 3 async pipe
   }
 
   ngOnInit(): void {
-    // this.getData();
+    this.userService.userObservable.subscribe((user: User) => {
+      this.userAuthenticated = user;
+    });
     this.watchQueryParams();
     this.subscriber.add(this.productService.dataChangedObservable.subscribe(() => {
       this.getData();

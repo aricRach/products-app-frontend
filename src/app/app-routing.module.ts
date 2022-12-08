@@ -8,12 +8,12 @@ import {TemplateDrivenComponent} from './forms/template-driven/template-driven.c
 import {DynamicFormsComponent} from './forms/dynamic-forms/dynamic-forms.component';
 import {ProductDetailComponent} from './containers/product-detail/product-detail.component';
 import {GithubSearchComponent} from './search/github-search/github-search.component';
-import {LoginComponent} from './user/login/login.component';
-import {AuthGuard} from './user/auth.guard';
+import {LoginComponent} from './user/components/login/login.component';
+import {AuthGuard} from './user/guards/auth.guard';
 import {AddProductComponent} from './containers/add-product/add-product.component';
 import {ExitFormGuard} from './ui/components/modals/exit-form.guard';
-import {OrdersComponent} from './containers/orders/orders.component';
-import {SignupComponent} from './user/signup/signup.component';
+import {OrdersComponent} from './containers/orders-history/components/orders/orders.component';
+import {SignupComponent} from './user/components/signup/signup.component';
 
 
 const routes: Routes = [

@@ -1,10 +1,13 @@
+import {User} from './app/user/models/user.model';
+
 export type Product = {
-  id: number;
+  id?: number;
   name: string;
-  image: string;
+  userOwner: User;
+  image?: string;
   price: number;
   stock: number;
   discountPercent: number,
-  finalPrice: number,
+  finalPrice?: number,
   date?: Date
 };

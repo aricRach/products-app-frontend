@@ -7,7 +7,7 @@ import {Subscription} from 'rxjs';
 import {ProductService} from '../../services/product.service';
 import {Product} from '../../../types';
 import {ConversionPipe} from '../../pipes/conversion.pipe';
-import {HttpClient} from '@angular/common/http';
+import {AddProductApiService} from '../add-product-api.service';
 
 @Component({
   selector: 'app-add-product',
@@ -41,7 +41,7 @@ export class AddProductComponent implements OnInit, OnDestroy {
               private currencyService: CurrencyService,
               private userService: UserService, private productService: ProductService,
               private route: ActivatedRoute, private conversionPipe: ConversionPipe,
-              private router: Router, private http: HttpClient) {
+              private router: Router, private addProductApiService: AddProductApiService) {
     this.isEditMode = this.route.snapshot.data.isEditMode;
   }
 
@@ -122,6 +122,11 @@ export class AddProductComponent implements OnInit, OnDestroy {
 
   toggleIsInSale(): void {
     this.isInSale = !this.isInSale;
+  }
+
+  private doAfterSetProduct(): void {
+    this.form.reset();
+    this.router.navigate(['/products']);
   }
 
   ngOnDestroy(): void {

@@ -1,6 +1,6 @@
 
 <div class="row" *ngIf="currencyCode$ | async; let code">
   <div class="col-md-3" *ngFor="let item of plist | filterBy: 'name' : search.value" appShadowEffect>
-    <app-product [currencyCode]="code" [data]="item" [searchTerm]="search.value" (btnClicked)="addItem($event)"></app-product>
+    <app-product [userAuthenticated]="userAuthenticated" [currencyCode]="code" [data]="item" [searchTerm]="search.value" (btnClicked)="addItem($event)"></app-product>
   </div>
 </div>

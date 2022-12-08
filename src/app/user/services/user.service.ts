@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {environment} from '../../../environments/environment';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {User} from '../models/user.model';
+import {UserApiService} from './user-api.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,21 +12,17 @@ export class UserService {
   private _user = {} as User;
   private userSubject = new BehaviorSubject(this._user);
   userObservable: Observable<any>;
-  constructor(private httpClient: HttpClient) {
+  constructor(private userApiService: UserApiService) {
     this.userObservable = this.userSubject.asObservable();
     this.rehydrate();
   }
 
   login(email: string, password: string): Observable<any> {
-    const url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${environment.apiKey}`;
-    const data = {email, password, returnSecureToken: true};
-    return this.httpClient.post(url, data);
+    return this.userApiService.login(email, password);
   }
 
   signUpFireBase(email: string, password: string): Observable<any> {
-    const url = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${environment.apiKey}`;
-    const data = {email, password, returnSecureToken: true};
-    return this.httpClient.post(url, data);
+    return this.userApiService.signUpFireBase(email, password);
   }
 
   createUserSession(user: any): void {
