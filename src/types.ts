@@ -1,13 +1,17 @@
 import {User} from './app/user/models/user.model';
 
-export type Product = {
+export interface Product {
   id?: number;
   name: string;
-  userOwner: User;
+  userOwner: string;
   image?: string;
   price: number;
   stock: number;
-  discountPercent: number,
-  finalPrice?: number,
-  date?: Date
-};
+  discountPercent: number;
+  finalPrice?: number;
+  date?: Date;
+}
+
+export interface ProductBackEnd extends Omit<Product, 'userOwner'>{
+  userOwner: User;
+}

@@ -41,7 +41,7 @@ export class ProductService {
 
   getProductsByOwner(email: string): Product[] {
     return this.allProducts.filter((product: Product) => {
-      return product.userOwner.email === email;
+      return product.userOwner === email;
     });
   }
 }

@@ -5,7 +5,7 @@ import {CurrencyService} from '../../currency/currency.service';
 import {UserService} from '../../user/services/user.service';
 import {Subscription} from 'rxjs';
 import {ProductService} from '../../services/product.service';
-import {Product} from '../../../types';
+import {Product, ProductBackEnd} from '../../../types';
 import {ConversionPipe} from '../../pipes/conversion.pipe';
 import {AddProductApiService} from '../add-product-api.service';
 
@@ -101,7 +101,7 @@ export class AddProductComponent implements OnInit, OnDestroy {
           userName: this.userService.getUser().userName,
           email: this.userService.getUser().email
         }
-      };
+      } as ProductBackEnd;
       if (this.isEditMode) {
         this.addProductApiService.updateProduct(this.id, product).subscribe(() => {
           this.doAfterSetProduct();
