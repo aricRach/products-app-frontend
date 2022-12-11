@@ -11,6 +11,7 @@ import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {ProductService} from '../../../../services/product.service';
 import {UserService} from '../../../../user/services/user.service';
 import {Cart} from '../../../../cart/models/cart.model';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-cart-modal',
@@ -34,7 +35,7 @@ export class CartModalComponent implements OnInit, OnDestroy {
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, private dialog: MatDialogRef<any>,
               private currencyService: CurrencyService, private store: Store, private http: HttpClient,
-              private productService: ProductService, private userService: UserService) {
+              private productService: ProductService, private userService: UserService, private snackBar: MatSnackBar) {
     this.cart = {} as Cart;
   }
 
@@ -90,10 +91,11 @@ export class CartModalComponent implements OnInit, OnDestroy {
     this.http.post(this.url, this.cart).subscribe(() => {
         this.store.dispatch(new EmptyCart());
         this.productService.dataChanged();
+        this.snackBar.open('purchase completed');
     }, (err: HttpErrorResponse) => {
         console.log(err.error.message);
-        // todo: create an error message
-      });
+        this.snackBar.open(err.error.message, 'close', {duration: 10000});
+    });
   }
 
   ngOnDestroy(): void {

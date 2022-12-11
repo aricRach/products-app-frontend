@@ -17,6 +17,7 @@ import {UserModule} from '../user/user.module';
 import { NavigationBarComponent } from './components/header-components/navigation-bar/navigation-bar.component';
 import { SearchComponent } from './components/header-components/search/search.component';
 import { CartButtonsComponent } from './components/header-components/cart-buttons/cart-buttons.component';
+import {MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarModule} from '@angular/material/snack-bar';
 
 
 
@@ -37,8 +38,9 @@ import { CartButtonsComponent } from './components/header-components/cart-button
     CommonModule,
     MatDialogModule,
     MatButtonModule,
-    PipesModule, CurrencyModule, UserModule,
+    PipesModule, CurrencyModule, UserModule, MatSnackBarModule
   ],
+  providers: [{provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2500}}],
     exports: [
         HeaderComponent,
         FooterComponent,
