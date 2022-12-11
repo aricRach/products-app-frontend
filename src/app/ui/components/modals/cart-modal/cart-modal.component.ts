@@ -19,7 +19,7 @@ import {Cart} from '../../../../cart/models/cart.model';
 })
 export class CartModalComponent implements OnInit, OnDestroy {
 
-  private url = 'http://localhost:8082/api/v1/product/buy';
+  private url = 'http://localhost:8083/api/v1/product/buy';
 
   currencyCode: string;
   isCartEmpty: boolean;

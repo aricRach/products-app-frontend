@@ -21,25 +21,31 @@ export class ProductListComponent implements OnInit, OnDestroy {
   plist: Product[] = [];
   search = new FormControl();
   selectedCode!: string;
-  currencyCode$!: Observable<string>; // option 3 async pipe
+  currencyCode$!: Observable<string>;
   subscriber = new Subscription();
   userAuthenticated: User;
   constructor(private productService: ProductService, private activeRoute: ActivatedRoute,
               private router: Router, private currencyService: CurrencyService, private store: Store, private userService: UserService) {
-    this.currencyCode$ = this.currencyService.currencyObservable;   // option 3 async pipe
+    this.currencyCode$ = this.currencyService.currencyObservable;
   }
 
   ngOnInit(): void {
-    this.userService.userObservable.subscribe((user: User) => {
-      this.userAuthenticated = user;
-    });
+    this.subscribeUser();
     this.watchQueryParams();
+    this.subscribeDataChange();
+  }
+
+  private subscribeDataChange(): void {
     this.subscriber.add(this.productService.dataChangedObservable.subscribe(() => {
       this.getData();
     }));
   }
-
-  watchQueryParams(): void {
+  private subscribeUser(): void {
+    this.subscriber.add(this.userService.userObservable.subscribe((user: User) => {
+      this.userAuthenticated = user;
+    }));
+  }
+  private watchQueryParams(): void {
     this.subscriber.add(this.activeRoute.queryParamMap.subscribe((param) => {
       param.has('search') ? this.search.setValue(param.get('search')) : this.search.setValue('');
     }));

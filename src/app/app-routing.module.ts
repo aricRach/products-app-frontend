@@ -14,6 +14,7 @@ import {AddProductComponent} from './containers/add-product/add-product.componen
 import {ExitFormGuard} from './ui/components/modals/exit-form.guard';
 import {OrdersComponent} from './containers/orders-history/components/orders/orders.component';
 import {SignupComponent} from './user/components/signup/signup.component';
+import {UserOwnerGuard} from './user/guards/user-owner.guard';
 
 
 const routes: Routes = [
@@ -47,7 +48,7 @@ const routes: Routes = [
     data: {
       isEditMode: true
     },
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, UserOwnerGuard],
     canDeactivate: [ExitFormGuard]
   },
   { path: '**', component: ErrorPageComponent},

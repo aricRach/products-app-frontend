@@ -9,9 +9,6 @@ import {ProductApiService} from './product-api.service';
 // @Injectable() // service is locally
 export class ProductService {
 
-  // private url = 'https://raw.githubusercontent.com/mdmoin7/Random-Products-Json-Generator/master/products.json';
-  private url = 'http://localhost:8082/api/v1/product';
-
   private dataChangedSubject = new BehaviorSubject(false);
 
   dataChangedObservable: Observable<boolean>;
@@ -39,6 +36,12 @@ export class ProductService {
    setAllProducts(): void {
     this.productApiService.getProducts().subscribe((products: Product[]) => {
       this._allProducts = products;
+    });
+  }
+
+  getProductsByOwner(email: string): Product[] {
+    return this.allProducts.filter((product: Product) => {
+      return product.userOwner.email === email;
     });
   }
 }

@@ -103,16 +103,12 @@ export class AddProductComponent implements OnInit, OnDestroy {
         }
       };
       if (this.isEditMode) {
-        this.http.put(`http://localhost:8082/api/v1/product/update-product/${this.id}`, product).subscribe(() => {
-          console.log('update');
-          this.form.reset();
-          this.router.navigate(['/products']);
+        this.addProductApiService.updateProduct(this.id, product).subscribe(() => {
+          this.doAfterSetProduct();
         });
       } else {
-        this.http.post('http://localhost:8082/api/v1/product', product).subscribe(() => {
-          console.log('create');
-          this.form.reset();
-          this.router.navigate(['/products']);
+        this.addProductApiService.addProduct(product).subscribe(() => {
+          this.doAfterSetProduct();
         });
       }
     } else {
