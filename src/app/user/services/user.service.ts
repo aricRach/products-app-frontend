@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {User} from '../models/user.model';
 import {UserApiService} from './user-api.service';
+import {Store} from '@ngxs/store';
+import {EmptyCart} from '../../cart/cart-actions.actions';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +14,7 @@ export class UserService {
   private _user = {} as User;
   private userSubject = new BehaviorSubject(this._user);
   userObservable: Observable<any>;
-  constructor(private userApiService: UserApiService) {
+  constructor(private userApiService: UserApiService, private store: Store) {
     this.userObservable = this.userSubject.asObservable();
     this.rehydrate();
   }
@@ -32,6 +34,7 @@ export class UserService {
 
   clearUserSession(): void {
     this._user = null;
+    this.store.dispatch(new EmptyCart());
     this.notify();
   }
 
