@@ -33,7 +33,7 @@ export class OrdersComponent implements OnInit {
     this.userEmail = this.userService.getUser().email;
     if (this.userEmail) {
       this.ordersApiService.getOrdersHistory(this.userEmail).subscribe((data: any) => {
-        this.orders = data.orders;
+        this.orders = data;
       });
     }
   }

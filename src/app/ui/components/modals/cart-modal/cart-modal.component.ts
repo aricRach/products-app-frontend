@@ -20,7 +20,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 })
 export class CartModalComponent implements OnInit, OnDestroy {
 
-  private url = 'http://localhost:8083/api/v1/product/buy';
+  private url = 'http://localhost:8083/api/v1/products/buy';
 
   currencyCode: string;
   isCartEmpty: boolean;
