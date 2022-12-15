@@ -7,7 +7,7 @@ import {Subscription} from 'rxjs';
 import {ProductService} from '../../services/product.service';
 import {Product, ProductBackEnd} from '../../../types';
 import {ConversionPipe} from '../../pipes/conversion.pipe';
-import {AddProductApiService} from '../add-product-api.service';
+import {AddProductApiService} from '../services/add-product-api.service';
 
 @Component({
   selector: 'app-add-product',

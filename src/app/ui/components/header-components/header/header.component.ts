@@ -1,21 +1,45 @@
-import { Component } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {UserService} from '../../../../user/services/user.service';
+import {Router} from '@angular/router';
+import {Subscription} from 'rxjs';
+import {NavigationItem} from '../models/navigation-item.model';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit, OnDestroy{
 
+  isAuthenticated: boolean;
+  private subscriber = new Subscription();
+  navs: NavigationItem[];
 
-  navs = [
-    { text: 'products', link: '/products' },
-    { text: 'github', link: '/github' },
-    { text: 'forms', link: '/forms' },
-    { text: 'orders', link: '/orders' },
-    { text: 'add product', link: '/add-product' },
-  ];
+  constructor(public userService: UserService, private router: Router) {}
 
-  constructor() {}
+  ngOnInit(): void {
+    this.subscriber.add(this.userService.userObservable.subscribe(
+      (user) => {
+        this.isAuthenticated = !!user;
+        this.setNavItems();
+      }));
+  }
 
+  setNavItems(): void {
+    this.navs = [
+      { text: 'products', link: '/products', show: true },
+      { text: 'my orders', link: '/orders', show: this.isAuthenticated },
+      { text: 'add product', link: '/add-product', show: this.isAuthenticated },
+      { text: 'my products', link: '/my-products', show: this.isAuthenticated },
+    ];
+  }
+
+  logout(): void {
+    this.userService.clearUserSession();
+    this.router.navigate(['/']);
+  }
+
+  ngOnDestroy(): void {
+    this.subscriber.unsubscribe();
+  }
 }

@@ -14,7 +14,7 @@
 
 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
   <li class="nav-item" *ngFor="let nav of navItems">
-    <a
+    <a *ngIf="nav.show"
       class="nav-link"
       [routerLink]="nav.link"
       [routerLinkActive]="['active']"

@@ -24,15 +24,20 @@ export class ProductListComponent implements OnInit, OnDestroy {
   currencyCode$!: Observable<string>;
   subscriber = new Subscription();
   userAuthenticated: User;
+  isMyProductsMode: boolean;
   constructor(private productService: ProductService, private activeRoute: ActivatedRoute,
               private router: Router, private currencyService: CurrencyService, private store: Store, private userService: UserService) {
     this.currencyCode$ = this.currencyService.currencyObservable;
+    this.plist = this.activeRoute.snapshot.data.productsList;
+    this.isMyProductsMode = this.plist != null;
   }
 
   ngOnInit(): void {
     this.subscribeUser();
     this.watchQueryParams();
-    this.subscribeDataChange();
+    if (!this.isMyProductsMode) {
+      this.subscribeDataChange();
+    }
   }
 
   private subscribeDataChange(): void {

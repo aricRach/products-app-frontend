@@ -25,6 +25,7 @@ import {CartState} from './cart/cart.state';
 import {PipesModule} from './pipes/pipes.module';
 import { AddProductComponent } from './containers/add-product/add-product.component';
 import { OrdersComponent } from './containers/orders-history/components/orders/orders.component';
+import { MyProductsComponent } from './containers/my-products/my-products.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { OrdersComponent } from './containers/orders-history/components/orders/o
     ProductDetailComponent,
     AddProductComponent,
     OrdersComponent,
+    MyProductsComponent,
   ],
     imports: [
         BrowserModule,

@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {NavigationItem} from '../models/navigation-item.model';
 
 @Component({
   selector: 'app-navigation-bar',
@@ -7,7 +8,7 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class NavigationBarComponent implements OnInit {
 
-  @Input() navItems: any;
+  @Input() navItems: NavigationItem[];
 
   constructor() { }
 

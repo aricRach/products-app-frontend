@@ -15,6 +15,7 @@ import {ExitFormGuard} from './ui/components/modals/exit-form.guard';
 import {OrdersComponent} from './containers/orders-history/components/orders/orders.component';
 import {SignupComponent} from './user/components/signup/signup.component';
 import {UserOwnerGuard} from './user/guards/user-owner.guard';
+import {MyProductsResolver} from './resolvers/my-products.resolver';
 
 
 const routes: Routes = [
@@ -27,6 +28,13 @@ const routes: Routes = [
   //   loadChildren: () => import('./orders/orders.module').then(m => m.OrdersModule)
   // },
   { path: 'products', component: ProductListComponent},
+  { path: 'my-products',
+    component: ProductListComponent,
+    canActivate: [AuthGuard],
+    resolve: {
+      productsList: MyProductsResolver
+    }
+  },
   { path: 'detail/:pid', component: ProductDetailComponent},
   { path: 'orders', component: OrdersComponent, canActivate: [AuthGuard]},
   { path: 'forms', children: [

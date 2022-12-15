@@ -5,7 +5,7 @@
         <app-currency></app-currency>
         <app-search></app-search>
         <app-cart-buttons></app-cart-buttons>
-      <app-login-buttons></app-login-buttons>
+      <app-login-buttons (logOutClicked)="logout()" [isAuthenticated]="isAuthenticated"></app-login-buttons>
     </div>
   </div>
 </nav>
