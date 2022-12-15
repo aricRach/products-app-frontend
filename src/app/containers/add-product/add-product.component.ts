@@ -46,7 +46,7 @@ export class AddProductComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.productService.setAllProducts();
+    this.productService.setAllProducts(this.userService.getUser()?.email);
     this.setProductItem();
     this.currencySubscription = this.currencyService.currencyObservable.subscribe((newCode: string) => {
       this.setNewCurrencyCode(newCode);

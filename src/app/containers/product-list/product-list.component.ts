@@ -57,7 +57,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
   }
 
   getData(): void {
-      this.productService.getProducts().subscribe(
+      this.productService.getProducts(this.userAuthenticated?.email).subscribe(
         (data: Product[]) => {
           console.log('success', data);
           this.plist = data;

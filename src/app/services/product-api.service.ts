@@ -12,8 +12,8 @@ export class ProductApiService {
 
   constructor(private http: HttpClient) { }
 
-  getProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(this.url);
+  getProducts(userEmail: string): Observable<Product[]> {
+    return this.http.get<Product[]>(this.url, {params: {userEmail}});
   }
 
   getMyProducts(email: string): Observable<Product[]> {

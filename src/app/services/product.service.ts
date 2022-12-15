@@ -17,7 +17,7 @@ export class ProductService {
   _allProducts: Product[];
 
   constructor(private productApiService: ProductApiService) {
-    this.setAllProducts();
+    // this.setAllProducts();
     this.dataChangedObservable = this.dataChangedSubject.asObservable();
   }
 
@@ -29,12 +29,12 @@ export class ProductService {
     this.dataChangedSubject.next(true);
   }
 
-  getProducts(): Observable<Product[]> {
-    return this.productApiService.getProducts();
+  getProducts(userEmail: string): Observable<Product[]> {
+    return this.productApiService.getProducts(userEmail);
   }
 
-   setAllProducts(): void {
-    this.productApiService.getProducts().subscribe((products: Product[]) => {
+   setAllProducts(userEmail: string): void {
+    this.productApiService.getProducts(userEmail).subscribe((products: Product[]) => {
       this._allProducts = products;
     });
   }
