@@ -3,6 +3,7 @@ import {UserService} from '../../../../user/services/user.service';
 import {Router} from '@angular/router';
 import {Subscription} from 'rxjs';
 import {NavigationItem} from '../models/navigation-item.model';
+import {ProductService} from '../../../../services/product.service';
 
 @Component({
   selector: 'app-header',
@@ -15,7 +16,7 @@ export class HeaderComponent implements OnInit, OnDestroy{
   private subscriber = new Subscription();
   navs: NavigationItem[];
 
-  constructor(public userService: UserService, private router: Router) {}
+  constructor(public userService: UserService, private router: Router, private productService: ProductService) {}
 
   ngOnInit(): void {
     this.subscriber.add(this.userService.userObservable.subscribe(
@@ -37,6 +38,7 @@ export class HeaderComponent implements OnInit, OnDestroy{
   logout(): void {
     this.userService.clearUserSession();
     this.router.navigate(['/']);
+    this.productService.dataChanged();
   }
 
   ngOnDestroy(): void {
