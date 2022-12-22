@@ -13,16 +13,8 @@ export class ProductService {
 
   dataChangedObservable: Observable<boolean>;
 
-  // tslint:disable-next-line:variable-name
-  _allProducts: Product[];
-
   constructor(private productApiService: ProductApiService) {
-    // this.setAllProducts();
     this.dataChangedObservable = this.dataChangedSubject.asObservable();
-  }
-
-  get allProducts(): Product[] {
-    return this._allProducts || [];
   }
 
   dataChanged(): void {
@@ -31,17 +23,5 @@ export class ProductService {
 
   getProducts(userEmail: string): Observable<Product[]> {
     return this.productApiService.getProducts(userEmail);
-  }
-
-   setAllProducts(userEmail: string): void {
-    this.productApiService.getProducts(userEmail).subscribe((products: Product[]) => {
-      this._allProducts = products;
-    });
-  }
-
-  getProductsByOwner(email: string): Product[] {
-    return this.allProducts.filter((product: Product) => {
-      return product.userOwner === email;
-    });
   }
 }
