@@ -19,4 +19,8 @@ export class ProductApiService {
   getMyProducts(email: string): Observable<Product[]> {
     return this.http.get<Product[]>(this.url + '/' + email);
   }
+
+  geProductById(id: string): Observable<Product> {
+    return this.http.get<Product>(this.url + '/single-product/' + +id);
+  }
 }

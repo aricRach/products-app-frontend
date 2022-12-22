@@ -42,12 +42,10 @@ export class AddProductComponent implements OnInit, OnDestroy {
               private userService: UserService, private productService: ProductService,
               private route: ActivatedRoute, private conversionPipe: ConversionPipe,
               private router: Router, private addProductApiService: AddProductApiService) {
-    this.isEditMode = this.route.snapshot.data.isEditMode;
+    this.setProductItem();
   }
 
   ngOnInit(): void {
-    this.productService.setAllProducts(this.userService.getUser()?.email);
-    this.setProductItem();
     this.currencySubscription = this.currencyService.currencyObservable.subscribe((newCode: string) => {
       this.setNewCurrencyCode(newCode);
     });
@@ -58,11 +56,10 @@ export class AddProductComponent implements OnInit, OnDestroy {
   }
 
   private setProductItem(): void {
+    this.isEditMode = this.route.snapshot.data.isEditMode;
     if (this.isEditMode) {
       this.id = +this.activeRoute.snapshot.paramMap.get('pid');
-      this.currentProduct = this.productService.allProducts.filter((product: Product) => {
-        return this.id === product.id;
-      })[0];
+      this.currentProduct = this.route.snapshot.data.product;
       this.isInSale = this.currentProduct.discountPercent > 0;
     }
   }
