@@ -88,6 +88,16 @@ export class CartModalComponent implements OnInit, OnDestroy {
 
   onApproveClicked(): any {
     this.cart.buyerEmail = this.userService.getUser().email;
+    const newArr = [...this.cart.cartItems];
+    // tslint:disable-next-line:prefer-for-of
+    for (let i = 0; i < this.cart.cartItems.length; i++) {
+      // @ts-ignore
+      newArr[0] = {...this.cart.cartItems[0], userOwner: {
+          email: this.cart.cartItems[0].userOwner,
+          userName: ''
+        }};
+    }
+    this.cart.cartItems = newArr;
     this.http.post(this.url, this.cart).subscribe(() => {
         this.store.dispatch(new EmptyCart());
         this.productService.dataChanged();
