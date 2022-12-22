@@ -13,7 +13,7 @@ import {Observable} from 'rxjs';
 export class OrdersComponent implements OnInit {
 
   private userEmail: string;
-  currencyCode$!: Observable<string>; // option 3 async pipe
+  currencyCode$!: Observable<string>;
 
   orders = [
    {name: 'a', finalPrice: 90, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSH8uNPasW-3vV49JlSRN6gyWbO5MXpP5HY8BJ7dasj&s',
@@ -26,7 +26,7 @@ export class OrdersComponent implements OnInit {
 
 
   constructor(private ordersApiService: OrdersApiService, private userService: UserService, private currencyService: CurrencyService) {
-    this.currencyCode$ = this.currencyService.currencyObservable;   // option 3 async pipe
+    this.currencyCode$ = this.currencyService.currencyObservable;
   }
 
   ngOnInit(): void {

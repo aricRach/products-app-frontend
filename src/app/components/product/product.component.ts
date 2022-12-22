@@ -11,6 +11,8 @@ export class ProductComponent implements OnInit {
 
   @Input() data!: Product;
   @Input() userAuthenticated: User;
+  @Input() isMyProductsMode: boolean;
+  addToCartClicked: boolean;
 
   @Output() btnClicked = new EventEmitter();
   @Input() currencyCode = 'INR';
@@ -21,6 +23,13 @@ export class ProductComponent implements OnInit {
   ngOnInit(): void {}
 
   notifyParent(): void {
-    this.btnClicked.emit(this.data);
+    if (this.userAuthenticated) {
+      this.addToCartClicked = true;
+      this.btnClicked.emit(this.data);
+    } else {
+      sessionStorage.setItem('itemToAdd', JSON.stringify(this.data));
+      this.btnClicked.emit(null);
+    }
+
   }
 }

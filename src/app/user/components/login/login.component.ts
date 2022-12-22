@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {UserService} from '../../services/user.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
+import {Store} from '@ngxs/store';
+import {AddToCart} from '../../../cart/cart-actions.actions';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +19,7 @@ export class LoginComponent implements OnInit {
     {updateOn: 'blur'}
     );
   errorMessage!: string;
-  constructor(private userService: UserService, private router: Router) { }
+  constructor(private userService: UserService, private router: Router, private store: Store) { }
 
   ngOnInit(): void {
   }
@@ -30,6 +32,11 @@ export class LoginComponent implements OnInit {
           console.log('success', data);
           this.errorMessage = '';
           this.userService.createUserSession(data);
+          const addToCartItem = sessionStorage.getItem('itemToAdd');
+          if (addToCartItem) {
+            this.store.dispatch(new AddToCart(JSON.parse(addToCartItem)));
+            sessionStorage.setItem('itemToAdd', null);
+          }
           this.router.navigate(['/']);
         },
         (err) => {

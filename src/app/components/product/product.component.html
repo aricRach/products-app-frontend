@@ -2,16 +2,25 @@
   <a [routerLink]="['/detail', data.id]">
   <img [src]="data.image" class="img-thumbnail">
   </a>
+
   <h3 [innerHTML]="data.name | itemTitle | highlightSearchResults : searchTerm  | uppercase " class="item-title">{{data.name }}</h3>
   <div class="price-details">
   <h4 [ngClass]="{'discount' : data.discountPercent > 0}">{{data.price | conversion:currencyCode | currency: currencyCode}}</h4>
   <div *ngIf="data.discountPercent">
-    <h4>{{data.price | calculateDiscount: data.discountPercent | conversion:currencyCode | currency: currencyCode}}</h4>
+    <h4>{{data.finalPrice | conversion:currencyCode | currency: currencyCode}}</h4>
   </div>
+
   </div>
-  <button class="btn btn-primary btn-sm w-100" (click)="notifyParent()" *ngIf="data.stock>0; else stock">add to cart</button>
-  <a *ngIf="userAuthenticated?.email === data.userOwner" [routerLink]="['/edit-product', data.id]" class="btn btn-primary btn-sm w-100">edit</a>
+  <div *ngIf="!isMyProductsMode; else myProductMode">
+  <button [hidden]="addToCartClicked" class="btn btn-primary btn-sm w-100" (click)="notifyParent()" *ngIf="data.stock>0; else stock">add to cart</button>
+  <app-counter [id]="data.id" *ngIf="addToCartClicked"></app-counter>
+  </div>
 </div>
+
+
+<ng-template #myProductMode>
+  <a [ngClass]="{'alert-stock': data.stock === 0 }" [routerLink]="['/edit-product', data.id]" class="btn btn-primary btn-sm w-100">edit</a>
+</ng-template>
 
 <ng-template #stock>
   <p>out of stock</p>
