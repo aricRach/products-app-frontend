@@ -1,6 +1,13 @@
 
 <div class="row" *ngIf="currencyCode$ | async; let code">
   <div class="col-md-3" *ngFor="let item of plist | filterBy: 'name' : search.value" appShadowEffect>
-    <app-product [isMyProductsMode]="isMyProductsMode" [userAuthenticated]="userAuthenticated" [currencyCode]="code" [data]="item" [searchTerm]="search.value" (btnClicked)="addItem($event)"></app-product>
+    <app-product [isMyProductsMode]="isMyProductsMode"
+                 [userAuthenticated]="userAuthenticated"
+                 [currencyCode]="code"
+                 [data]="item"
+                 [searchTerm]="search.value"
+                 [idToCartIndexMap]="idToCartIndexMap"
+                 (btnClicked)="addItem($event)">
+    </app-product>
   </div>
 </div>

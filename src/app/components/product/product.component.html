@@ -13,7 +13,7 @@
   </div>
   <div *ngIf="!isMyProductsMode; else myProductMode">
   <button [hidden]="isProductInCart" class="btn btn-primary btn-sm w-100" (click)="addToCartClicked()" *ngIf="data.stock>0; else stock">add to cart</button>
-  <app-counter [numberOfItems]="(cartItems$ | async)[this.cartIndex].numberOfItems" (counterClicked)="counterClicked($event)" [id]="data.id" *ngIf="isProductInCart"></app-counter>
+  <app-counter [numberOfItems]="(cartItems$ | async)[idToCartIndexMap[data.id]]?.numberOfItems" (counterClicked)="counterClicked($event)" [id]="data.id" *ngIf="isProductInCart"></app-counter>
   </div>
 </div>
 
