@@ -5,13 +5,14 @@ import {CartState} from '../../../../cart/cart.state';
 import {Observable, Subscription} from 'rxjs';
 import {CartItem} from '../../../../cart/models/cart-item.model';
 import {CurrencyService} from '../../../../currency/currency.service';
-import {DecreaseItems, EmptyCart, IncreaseItems, RemoveFromCart} from '../../../../cart/cart-actions.actions';
+import {EmptyCart, RemoveFromCart} from '../../../../cart/cart-actions.actions';
 import {CounterAction} from '../../counter/counter-action.model';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {ProductService} from '../../../../services/product.service';
 import {UserService} from '../../../../user/services/user.service';
 import {Cart} from '../../../../cart/models/cart.model';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {CartCounterHandlerService} from '../../../../cart/services/cart-counter-handler.service';
 
 @Component({
   selector: 'app-cart-modal',
@@ -35,7 +36,8 @@ export class CartModalComponent implements OnInit, OnDestroy {
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, private dialog: MatDialogRef<any>,
               private currencyService: CurrencyService, private store: Store, private http: HttpClient,
-              private productService: ProductService, private userService: UserService, private snackBar: MatSnackBar) {
+              private productService: ProductService, private userService: UserService, private snackBar: MatSnackBar,
+              private cartCounterHandlerService: CartCounterHandlerService) {
     this.cart = {} as Cart;
   }
 
@@ -72,17 +74,9 @@ export class CartModalComponent implements OnInit, OnDestroy {
   }
 
   onCounterClicked(action: CounterAction): void {
-    if (action.actionType === 'increase') {
-      this.store.dispatch(new IncreaseItems(action));
-    } else {
-      if (action.numberOfItems === 1) {
-        this.store.dispatch(new RemoveFromCart(action.id));
-        if (this.isCartEmpty) {
-          this.dialog.close();
-        }
-      } else{
-        this.store.dispatch(new DecreaseItems(action));
-      }
+    this.cartCounterHandlerService.onCounterClicked(action);
+    if (this.isCartEmpty) {
+      this.dialog.close();
     }
   }
 

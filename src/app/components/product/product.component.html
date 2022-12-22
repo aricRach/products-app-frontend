@@ -12,8 +12,8 @@
 
   </div>
   <div *ngIf="!isMyProductsMode; else myProductMode">
-  <button [hidden]="addToCartClicked" class="btn btn-primary btn-sm w-100" (click)="notifyParent()" *ngIf="data.stock>0; else stock">add to cart</button>
-  <app-counter [id]="data.id" *ngIf="addToCartClicked"></app-counter>
+  <button [hidden]="isProductInCart" class="btn btn-primary btn-sm w-100" (click)="addToCartClicked()" *ngIf="data.stock>0; else stock">add to cart</button>
+  <app-counter [numberOfItems]="(cartItems$ | async)[this.cartIndex].numberOfItems" (counterClicked)="counterClicked($event)" [id]="data.id" *ngIf="isProductInCart"></app-counter>
   </div>
 </div>
 
