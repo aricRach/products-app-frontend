@@ -4,6 +4,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {Store} from '@ngxs/store';
 import {AddToCart} from '../../../cart/cart-actions.actions';
+import {Product} from '../../../../types';
 
 @Component({
   selector: 'app-login',
@@ -34,8 +35,11 @@ export class LoginComponent implements OnInit {
           this.userService.createUserSession(data);
           const addToCartItem = sessionStorage.getItem('itemToAdd');
           if (addToCartItem) {
-            this.store.dispatch(new AddToCart(JSON.parse(addToCartItem)));
-            sessionStorage.setItem('itemToAdd', null);
+            const item = JSON.parse(addToCartItem) as Product;
+            if (email !== item.userOwner) {
+              this.store.dispatch(new AddToCart(JSON.parse(addToCartItem)));
+              sessionStorage.setItem('itemToAdd', null);
+            }
           }
           this.router.navigate(['/']);
         },
