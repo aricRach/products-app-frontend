@@ -29,6 +29,9 @@ export class ProductListComponent implements OnInit, OnDestroy {
   isMyProductsMode: boolean;
   idToCartIndexMap: IdToCartIndex;
   cartItems: CartItem[];
+  isInSaleProducts: string;
+  sortBy: string;
+  isUpSortDirection: boolean;
 
   @Select(CartState.getCartItems) cartItems$: Observable<Array<CartItem>> | undefined;
 
@@ -99,6 +102,18 @@ export class ProductListComponent implements OnInit, OnDestroy {
     } else {
       this.router.navigate(['/login']);
     }
+  }
+
+  filterIsInSale(isInSale: boolean): void {
+    this.isInSaleProducts = '' + isInSale;
+  }
+
+  onSortByChanged(sortBy: string): void {
+    this.sortBy = sortBy;
+  }
+
+  onSortDirectionChanged(isUp: boolean): void {
+    this.isUpSortDirection = isUp;
   }
 
   ngOnDestroy(): void {

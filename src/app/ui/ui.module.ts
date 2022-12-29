@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './components/header-components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
 import { CounterComponent } from './components/counter/counter.component';
 import {BrowserModule} from '@angular/platform-browser';
@@ -18,7 +18,10 @@ import { NavigationBarComponent } from './components/header-components/navigatio
 import { SearchComponent } from './components/header-components/search/search.component';
 import { CartButtonsComponent } from './components/header-components/cart-buttons/cart-buttons.component';
 import {MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarModule} from '@angular/material/snack-bar';
-
+import { SearchFiltersComponent } from './components/search-filters/search-filters.component';
+import {MatSliderModule} from '@angular/material/slider';
+import {MatCardModule} from '@angular/material/card';
+import {MatIconModule} from '@angular/material/icon';
 
 
 @NgModule({
@@ -31,21 +34,23 @@ import {MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarModule} from '@angular/materia
     NavigationBarComponent,
     SearchComponent,
     CartButtonsComponent,
+    SearchFiltersComponent,
   ],
-  imports: [
-    CommonModule, RouterModule, ReactiveFormsModule, BrowserModule,
-    BrowserAnimationsModule,
-    CommonModule,
-    MatDialogModule,
-    MatButtonModule,
-    PipesModule, CurrencyModule, UserModule, MatSnackBarModule
-  ],
+    imports: [
+        CommonModule, RouterModule, ReactiveFormsModule, BrowserModule,
+        BrowserAnimationsModule,
+        CommonModule,
+        MatDialogModule,
+        MatButtonModule,
+        PipesModule, CurrencyModule, UserModule, MatSnackBarModule, FormsModule, MatSliderModule, MatCardModule, MatIconModule
+    ],
   providers: [{provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2500}}],
     exports: [
         HeaderComponent,
         FooterComponent,
         CounterComponent,
-      CartModalComponent
+        CartModalComponent,
+        SearchFiltersComponent
     ]
 })
 export class UiModule { }

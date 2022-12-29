@@ -4,6 +4,7 @@ import {ConversionPipe} from './conversion.pipe';
 import {FilterByPipe} from './filter-by.pipe';
 import { ItemTitlePipe } from './item-title.pipe';
 import { HighlightSearchResultsPipe } from './highlight-search-results.pipe';
+import { SortPipe } from './sort.pipe';
 
 @NgModule({
   declarations: [
@@ -12,6 +13,7 @@ import { HighlightSearchResultsPipe } from './highlight-search-results.pipe';
     FilterByPipe,
     ItemTitlePipe,
     HighlightSearchResultsPipe,
+    SortPipe,
   ],
   providers: [
     ConversionPipe
@@ -24,6 +26,7 @@ import { HighlightSearchResultsPipe } from './highlight-search-results.pipe';
         FilterByPipe,
         ItemTitlePipe,
         HighlightSearchResultsPipe,
+        SortPipe,
     ]
 })
 export class PipesModule { }

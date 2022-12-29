@@ -44,7 +44,5 @@ export class ProductComponent {
 
   counterClicked(action: CounterAction): void {
     this.cartCounterHandlerService.onCounterClicked(action);
-    if (action.numberOfItems === 1 && action.actionType === 'decrease') {
-    }
   }
 }
