@@ -1,4 +1,5 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {SortByOption} from './sort-by-option.model';
 
 @Component({
   selector: 'app-search-filters',
@@ -7,6 +8,7 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 })
 export class SearchFiltersComponent implements OnInit {
 
+  @Input() sortByOptions: SortByOption[];
   @Output() isInSaleChanged = new EventEmitter();
   @Output() sortDirectionChanged = new EventEmitter();
   @Output() sortByChanged = new EventEmitter();

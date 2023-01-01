@@ -1,8 +1,7 @@
 <div class="in-row">
   <label [for]="'sort-by'">sort by: </label>
-  <select id="sort-by" (ngModelChange)="onSortByChanged($event)" [(ngModel)]="sortBy">
-  <option>name</option>
-  <option>finalPrice</option>
+  <select  id="sort-by" (ngModelChange)="onSortByChanged($event)" [(ngModel)]="sortBy">
+  <option *ngFor="let sortOption of sortByOptions">{{sortOption.alias}}</option>
 </select>
 
 <!--<input class="arrow" (ngModelChange)="onSortDirectionChanged($event)" [(ngModel)]="up" type="checkbox">-->

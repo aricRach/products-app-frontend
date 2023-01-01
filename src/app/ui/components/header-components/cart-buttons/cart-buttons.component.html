@@ -1,4 +1,5 @@
 <div>
-  <button (click)="goToCart()">cart</button>
+  <mat-icon class="cart-icon" (click)="goToCart()">shopping_cart</mat-icon>
+
   <small>{{(cartItems$ | async)?.length}}</small>
 </div>

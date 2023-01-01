@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CurrencyComponent } from './currency/currency.component';
+import {MatIconModule} from '@angular/material/icon';
 
 
 
@@ -8,9 +9,10 @@ import { CurrencyComponent } from './currency/currency.component';
   declarations: [
     CurrencyComponent
   ],
-  imports: [
-    CommonModule
-  ],
+    imports: [
+        CommonModule,
+        MatIconModule
+    ],
   exports: [
     CurrencyComponent
   ]

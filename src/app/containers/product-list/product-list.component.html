@@ -1,5 +1,5 @@
 
-<app-search-filters (isInSaleChanged)="filterIsInSale($event)" (sortByChanged)="onSortByChanged($event)" (sortDirectionChanged)="onSortDirectionChanged($event)"></app-search-filters>
+<app-search-filters [sortByOptions] = sortByOptions (isInSaleChanged)="filterIsInSale($event)" (sortByChanged)="onSortByChanged($event)" (sortDirectionChanged)="onSortDirectionChanged($event)"></app-search-filters>
 <div class="row" *ngIf="currencyCode$ | async; let code">
   <div class="col-md-3" *ngFor="let item of plist | filterBy: ['name', 'isInSale'] : [search.value, isInSaleProducts] | sort : sortBy : isUpSortDirection" appShadowEffect>
     <app-product [isMyProductsMode]="isMyProductsMode"

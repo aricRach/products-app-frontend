@@ -12,6 +12,7 @@ import {UserService} from '../../user/services/user.service';
 import {User} from '../../user/models/user.model';
 import {CartState} from '../../cart/cart.state';
 import {IdToCartIndex} from '../../cart/models/id-to-cart-index.model';
+import {SortByOption} from '../../ui/components/search-filters/sort-by-option.model';
 
 @Component({
   selector: 'app-product-list',
@@ -35,6 +36,8 @@ export class ProductListComponent implements OnInit, OnDestroy {
 
   @Select(CartState.getCartItems) cartItems$: Observable<Array<CartItem>> | undefined;
 
+  sortByOptions: SortByOption[];
+
   constructor(private productService: ProductService, private activeRoute: ActivatedRoute,
               private router: Router, private currencyService: CurrencyService, private store: Store, private userService: UserService) {
     this.currencyCode$ = this.currencyService.currencyObservable;
@@ -42,6 +45,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
     this.isMyProductsMode = this.plist != null;
     this.idToCartIndexMap = {};
     this.cartItems = [];
+    this.sortByOptions = [{alias: 'name', value: 'name'}, {alias: 'price', value: 'finalPrice'}];
   }
 
   ngOnInit(): void {
