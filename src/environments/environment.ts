@@ -5,6 +5,14 @@
 export const environment = {
   production: false,
   apiKey: 'AIzaSyC7l71cDUdrI9VrYrL2Bypomxncl1UAKDo',
+  firebase: {
+    apiKey: 'AIzaSyC7l71cDUdrI9VrYrL2Bypomxncl1UAKDo',
+    authDomain: 'products-app-3d24f.firebaseapp.com',
+    projectId: 'products-app-3d24f',
+    storageBucket: 'products-app-3d24f.appspot.com',
+    messagingSenderId: '389186545795',
+    appId: '1:389186545795:web:67518e72e587275cb0d3b6'
+  }
 };
 
 /*

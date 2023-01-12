@@ -1,5 +1,5 @@
 
-<form [formGroup]="form" (submit)="saveData()" class="bg-light border rounded p-4">
+<form [formGroup]="form" (submit)="saveDataToStorage()" class="bg-light border rounded p-4">
   <h1>add new product</h1>
   <div class="form-group">
     <label>Name</label>
@@ -40,6 +40,14 @@
     <label>stock</label>
     <input [min]="0" type="number" formControlName="stock" class="form-control">
     <small *ngIf="form.get('stock')?.hasError('min')">Can't set negative number</small>
+  </div>
+
+  <div class="form-group">
+    <label>image</label>
+
+    <div class="my-3">
+      <app-upload-form [percent]=imageProcessPercent (fileSelected)="markImgController($event)" (fileUploaded)="updateImgUrl($event)"></app-upload-form>
+    </div>
   </div>
 
   <button [disabled]="!isFormValid" type="submit" class="btn btn-success btn-sm my-4">Submit</button>

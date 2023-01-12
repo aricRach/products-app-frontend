@@ -1,0 +1,18 @@
+<label>
+  <input
+    type="file"
+    class="text-nowrap text-truncate"
+    (change)="selectFile($event)"
+  />
+</label>
+
+
+<div *ngIf="percent" class="progress mt-2">
+  <div
+    class="progress-bar progress-bar-info"
+    role="progressbar"
+    [ngStyle]="{ width: percent + '%' }"
+  >
+    {{ percent }}%
+  </div>
+</div>

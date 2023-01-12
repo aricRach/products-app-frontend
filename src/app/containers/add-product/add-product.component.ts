@@ -8,6 +8,8 @@ import {ProductService} from '../../services/product.service';
 import {Product, ProductBackEnd} from '../../../types';
 import {ConversionPipe} from '../../pipes/conversion.pipe';
 import {AddProductApiService} from '../services/add-product-api.service';
+import {FileUploadService} from '../../upload/file-upload.service';
+import {FileUpload} from '../../upload/file-upload';
 
 @Component({
   selector: 'app-add-product',
@@ -26,6 +28,8 @@ export class AddProductComponent implements OnInit, OnDestroy {
   currencyCode: string;
   isInSale: boolean;
   isEditMode: boolean;
+  fileToUpload: File;
+  imageProcessPercent: number;
 
   get totalPrice(): number {
     const currentPrice = this.form.get('price').value;
@@ -41,7 +45,8 @@ export class AddProductComponent implements OnInit, OnDestroy {
               private currencyService: CurrencyService,
               private userService: UserService, private productService: ProductService,
               private route: ActivatedRoute, private conversionPipe: ConversionPipe,
-              private router: Router, private addProductApiService: AddProductApiService) {
+              private router: Router, private addProductApiService: AddProductApiService,
+              private fileUploadService: FileUploadService) {
     this.setProductItem();
   }
 
@@ -84,32 +89,44 @@ export class AddProductComponent implements OnInit, OnDestroy {
         [Validators.min(0), Validators.max(90)]),
       stock: new FormControl(this.isEditMode ? this.currentProduct.stock : '',
         [Validators.required, Validators.min(0)]),
+      image: new FormControl(this.isEditMode ? this.currentProduct.image : '', [Validators.required])
     });
   }
 
-  saveData(): any {
+  saveDataToStorage(): any {
     if (this.form.valid) {
-      const product = {
-        name: this.form.get('name').value,
-        price: this.conversionPipe.transform(this.form.get('price').value, this.currencyCode, true),
-        discountPercent: this.form.get('isInSale').value ? this.form.get('discountPercent').value : 0,
-        stock: this.form.get('stock').value,
-        userOwner: {
-          userName: this.userService.getUser().userName,
-          email: this.userService.getUser().email
+      this.form.disable();
+      const currentFileUpload = new FileUpload(this.fileToUpload);
+      this.fileUploadService.pushFileToStorage(currentFileUpload).subscribe((Percent: number) => {
+        this.imageProcessPercent = Percent;
+        },
+        error => {
+          console.log(error);
         }
-      } as ProductBackEnd;
-      if (this.isEditMode) {
-        this.addProductApiService.updateProduct(this.id, product).subscribe(() => {
-          this.doAfterSetProduct();
-        });
-      } else {
-        this.addProductApiService.addProduct(product).subscribe(() => {
-          this.doAfterSetProduct();
-        });
+      );
+    }
+  }
+
+  saveProduct(): void {
+    const product = {
+      name: this.form.get('name').value,
+      price: this.conversionPipe.transform(this.form.get('price').value, this.currencyCode, true),
+      discountPercent: this.form.get('isInSale').value ? this.form.get('discountPercent').value : 0,
+      stock: this.form.get('stock').value,
+      image: this.form.get('image').value,
+      userOwner: {
+        userName: this.userService.getUser().userName,
+        email: this.userService.getUser().email
       }
+    } as ProductBackEnd;
+    if (this.isEditMode) {
+      this.addProductApiService.updateProduct(this.id, product).subscribe(() => {
+        this.doAfterSetProduct();
+      });
     } else {
-      console.error('form not valid');
+      this.addProductApiService.addProduct(product).subscribe(() => {
+        this.doAfterSetProduct();
+      });
     }
   }
 
@@ -125,5 +142,15 @@ export class AddProductComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.currencySubscription?.unsubscribe();
     this.ownerSubscription?.unsubscribe();
+  }
+
+  updateImgUrl(imageUrl: string): void {
+    this.form.get('image').setValue(imageUrl);
+    this.saveProduct();
+  }
+
+  markImgController(file: File): void {
+    this.fileToUpload = file;
+    this.form.get('image').setValue('selected');
   }
 }

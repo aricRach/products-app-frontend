@@ -26,6 +26,11 @@ import {PipesModule} from './pipes/pipes.module';
 import { AddProductComponent } from './containers/add-product/add-product.component';
 import { OrdersComponent } from './containers/orders-history/components/orders/orders.component';
 import { MyProductsComponent } from './containers/my-products/my-products.component';
+import {AngularFireModule} from '@angular/fire';
+import {AngularFireStorageModule} from '@angular/fire/storage';
+import {AngularFireDatabaseModule} from '@angular/fire/database';
+import { UploadFormComponent } from './upload/upload-form/upload-form.component';
+import {environment} from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -43,6 +48,7 @@ import { MyProductsComponent } from './containers/my-products/my-products.compon
     AddProductComponent,
     OrdersComponent,
     MyProductsComponent,
+    UploadFormComponent
   ],
     imports: [
         BrowserModule,
@@ -55,7 +61,10 @@ import { MyProductsComponent } from './containers/my-products/my-products.compon
         CurrencyModule,
         UserModule,
         PipesModule,
-        NgxsModule.forRoot([CartState])
+        NgxsModule.forRoot([CartState]),
+        AngularFireModule.initializeApp(environment.firebase),
+        AngularFireStorageModule,
+        AngularFireDatabaseModule
     ],
   providers: [
     {
