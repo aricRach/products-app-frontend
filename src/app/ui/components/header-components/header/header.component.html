@@ -1,11 +1,13 @@
-<nav class="navbar navbar-expand-lg bg-light">
-  <div class="container-fluid">
-     <app-navigation-bar [navItems]="navs"></app-navigation-bar>
-      <div class="in-row">
-        <app-currency></app-currency>
+    <div class="header in-row space">
+      <div class="left-side">
+      <app-navigation-bar [navItems]="navs"></app-navigation-bar>
+      </div>
+      <div class="middle">
         <app-search></app-search>
+      </div>
+      <div class="right-side in-row">
+        <app-currency></app-currency>
         <app-cart-buttons></app-cart-buttons>
       <app-login-buttons (logOutClicked)="logout()" [isAuthenticated]="isAuthenticated"></app-login-buttons>
+      </div>
     </div>
-  </div>
-</nav>

@@ -1,0 +1,36 @@
+a{
+  text-decoration: none;
+}
+a:hover, a:active{
+  color: lightgray;
+}
+
+.nav-item {
+  color: blue;
+  opacity: 0.4;
+}
+
+.navbar-brand {
+  color: black;
+}
+
+:host ::ng-deep .mat-tab-link-container {
+  width: 480px !important;
+}
+
+:host ::ng-deep .mat-tab-link {
+  min-width: 80px !important;
+}
+
+@media only screen and (max-width: 1050px) {
+  .nav-panel {
+    display: none;
+    transition: display 1s ease-out;
+  }
+}
+
+@media only screen and (min-width: 1050px) {
+  .nav-button {
+    display: none;
+  }
+}
