@@ -50,5 +50,6 @@
     </div>
   </div>
 
-  <button [disabled]="!isFormValid" type="submit" class="btn btn-success btn-sm my-4">Submit</button>
+  <button [ngClass]="{'disabled': !isFormValid}" [disabled]="!isFormValid" type="submit" class="action-btn submit-btn">Submit</button>
+
 </form>
