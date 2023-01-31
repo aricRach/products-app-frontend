@@ -1,10 +1,10 @@
 <h1 class="title">Orders History</h1>
 <div class="grid-container grid-header">
   <h5>img</h5>
-  <h5>name</h5>
-  <h5>quantity</h5>
-  <h5>total price</h5>
-  <h5>date</h5>
+  <h5 class="sortable-header" appSortable [sortable]="'name'" (sort)="onSort($event)">name</h5>
+  <h5 class="sortable-header" appSortable [sortable]="'numberOfItems'" (sort)="onSort($event)">quantity</h5>
+  <h5 class="sortable-header" appSortable [sortable]="'finalPrice'" (sort)="onSort($event)">total price</h5>
+  <h5 class="sortable-header" appSortable [sortable]="'date'" (sort)="onSort($event)">date</h5>
 </div>
 
 <div *ngFor="let order of orders">

@@ -30,6 +30,7 @@ import {AngularFireStorageModule} from '@angular/fire/storage';
 import {AngularFireDatabaseModule} from '@angular/fire/database';
 import { UploadFormComponent } from './upload/upload-form/upload-form.component';
 import {environment} from '../environments/environment';
+import { SortableHeaderDirective } from './directives/sortable-header.directive';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import {environment} from '../environments/environment';
     ProductDetailComponent,
     AddProductComponent,
     OrdersComponent,
-    UploadFormComponent
+    UploadFormComponent,
+    SortableHeaderDirective
   ],
     imports: [
         BrowserModule,

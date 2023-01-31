@@ -65,3 +65,17 @@ mat-icon {
   background-color: rgb(220,220,220);
   cursor: not-allowed;
 }
+
+.asc::after  {
+  content: " ^";
+  font-size: 18px;
+}
+.desc::after {
+  content: ' v';
+  font-weight: normal;
+}
+
+.sortable-header:hover {
+  cursor: pointer;
+}
+
