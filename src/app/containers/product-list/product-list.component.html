@@ -1,7 +1,8 @@
 
 <app-search-filters [sortByOptions] = sortByOptions (isInSaleChanged)="filterIsInSale($event)" (sortByChanged)="onSortByChanged($event)" (sortDirectionChanged)="onSortDirectionChanged($event)"></app-search-filters>
-<div class="row" *ngIf="currencyCode$ | async; let code">
-  <div class="col-md-3" *ngFor="let item of plist | filterBy: ['name', 'isInSale'] : [search.value, isInSaleProducts] | sort : sortBy : isUpSortDirection" appShadowEffect>
+<div class="in-row wrap" *ngIf="currencyCode$ | async; let code">
+  <div class="flex-item item" *ngFor="let item of plist | filterBy: ['name', 'isInSale'] : [search.value, isInSaleProducts]
+  | sort : sortBy : isUpSortDirection | slice :currentPageIndex * pageSize  : pageSize * (currentPageIndex + 1)" appShadowEffect>
     <app-product [isMyProductsMode]="isMyProductsMode"
                  [userAuthenticated]="userAuthenticated"
                  [currencyCode]="code"
@@ -12,3 +13,5 @@
     </app-product>
   </div>
 </div>
+
+<app-footer [productsLength]="plist.length" (pageChanged)="onPageChanged($event)"></app-footer>

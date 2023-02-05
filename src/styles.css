@@ -1,3 +1,7 @@
+
+body {
+  min-height: 100%;
+}
 .discount {
   text-decoration: line-through;
   color: red;
@@ -7,6 +11,22 @@
 .in-row {
   display: flex;
   align-items: center;
+}
+
+.wrap {
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.flex-item {
+  flex-basis: 30%;
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+
+.item {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
 .space {

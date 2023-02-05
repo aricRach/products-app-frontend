@@ -27,6 +27,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTabGroup, MatTabsModule} from '@angular/material/tabs';
 import {MatMenuModule} from '@angular/material/menu';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 
 @NgModule({
@@ -48,7 +49,7 @@ import {MatMenuModule} from '@angular/material/menu';
       MatDialogModule,
       MatButtonModule,
       PipesModule, CurrencyModule, UserModule, MatSnackBarModule, FormsModule,
-      MatSliderModule, MatCardModule, MatIconModule, MatTabsModule, MatMenuModule
+      MatSliderModule, MatCardModule, MatIconModule, MatTabsModule, MatMenuModule, MatPaginatorModule
     ],
   providers: [{provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2500}}],
     exports: [
@@ -57,7 +58,8 @@ import {MatMenuModule} from '@angular/material/menu';
       CounterComponent,
       CartModalComponent,
       SearchFiltersComponent,
-      MatMenuModule
+      MatMenuModule,
+      MatPaginatorModule
     ]
 })
 export class UiModule { }

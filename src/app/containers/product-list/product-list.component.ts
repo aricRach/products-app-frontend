@@ -13,6 +13,7 @@ import {User} from '../../user/models/user.model';
 import {CartState} from '../../cart/cart.state';
 import {IdToCartIndex} from '../../cart/models/id-to-cart-index.model';
 import {SortByOption} from '../../ui/components/search-filters/sort-by-option.model';
+import {PageEvent} from '@angular/material/paginator';
 
 @Component({
   selector: 'app-product-list',
@@ -33,6 +34,8 @@ export class ProductListComponent implements OnInit, OnDestroy {
   isInSaleProducts: string;
   sortBy: string;
   isUpSortDirection: boolean;
+  currentPageIndex = 0;
+  pageSize = 5;
 
   @Select(CartState.getCartItems) cartItems$: Observable<Array<CartItem>> | undefined;
 
@@ -41,8 +44,6 @@ export class ProductListComponent implements OnInit, OnDestroy {
   constructor(private productService: ProductService, private activeRoute: ActivatedRoute,
               private router: Router, private currencyService: CurrencyService, private store: Store, private userService: UserService) {
     this.currencyCode$ = this.currencyService.currencyObservable;
-    this.plist = this.activeRoute.snapshot.data.productsList;
-    this.isMyProductsMode = this.plist != null;
     this.idToCartIndexMap = {};
     this.cartItems = [];
     this.sortByOptions = [{alias: 'name', value: 'name'}, {alias: 'price', value: 'finalPrice'}];
@@ -51,6 +52,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.subscribeUser();
     this.watchQueryParams();
+    this.setMode();
     if (!this.isMyProductsMode) {
       this.subscribeDataChange();
     }
@@ -91,7 +93,6 @@ export class ProductListComponent implements OnInit, OnDestroy {
         (data: Product[]) => {
           console.log('success', data);
           this.plist = data;
-          console.log(this.plist);
         },
         (err: any) => {
           console.log('error', err);
@@ -122,5 +123,19 @@ export class ProductListComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscriber.unsubscribe();
+  }
+
+  onPageChanged(pageEvent: PageEvent): void {
+    this.currentPageIndex = pageEvent.pageIndex;
+    this.pageSize = pageEvent.pageSize;
+  }
+
+  private setMode(): void {
+    this.plist = this.activeRoute.snapshot.data.productsList;
+    if (this.plist != null) {
+      this.isMyProductsMode = true;
+    } else {
+      this.plist = [];
+    }
   }
 }

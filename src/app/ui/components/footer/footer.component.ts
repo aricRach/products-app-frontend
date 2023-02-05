@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, Output, EventEmitter, Input} from '@angular/core';
+import {PageEvent} from '@angular/material/paginator';
 
 @Component({
   selector: 'app-footer',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FooterComponent implements OnInit {
 
+  @Input() productsLength: number;
+  @Output() pageChanged = new EventEmitter();
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  onPageChanged(pageEvent: PageEvent): void {
+    this.pageChanged.emit(pageEvent);
+  }
 }

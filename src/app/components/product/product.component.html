@@ -1,6 +1,6 @@
 <div class="p-4 justify-center align-items-center d-flex flex-column">
   <a [routerLink]="['/detail', data.id]">
-  <img [src]="data.image" class="img-thumbnail">
+  <img width="200" height="200" [src]="data.image" class="img-thumbnail">
   </a>
 
   <h3 [innerHTML]="data.name | itemTitle | highlightSearchResults : searchTerm  | uppercase " class="item-title">{{data.name }}</h3>
