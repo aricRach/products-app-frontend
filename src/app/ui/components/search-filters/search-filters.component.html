@@ -1,49 +1,16 @@
-<div class="in-row">
-  <label [for]="'sort-by'">sort by: </label>
-  <select  id="sort-by" (ngModelChange)="onSortByChanged($event)" [(ngModel)]="sortBy">
-  <option *ngFor="let sortOption of sortByOptions">{{sortOption.alias}}</option>
-</select>
+<div class="in-row search-filters">
+  <label [for]="'sort-by'">sort by </label>
+  <select id="sort-by" (ngModelChange)="onSortByChanged($event)" [(ngModel)]="sortBy">
+    <option *ngFor="let sortOption of sortByOptions">{{sortOption.alias}}</option>
+  </select>
 
-<!--<input class="arrow" (ngModelChange)="onSortDirectionChanged($event)" [(ngModel)]="up" type="checkbox">-->
-<!--  <mat-icon *ngIf="!up">keyboard_arrow_up</mat-icon>-->
-<!--  <mat-icon *ngIf="up">keyboard_arrow_down</mat-icon>-->
-<!--</div>-->
+  <button *ngIf="sortBy" class="arrow-btn" (click)="onSortDirectionChanged()">
+    <mat-icon *ngIf="!up">keyboard_arrow_up</mat-icon>
+    <mat-icon *ngIf="up">keyboard_arrow_down</mat-icon>
+  </button>
 
-<button *ngIf="sortBy" class="arrow-btn" (click)="onSortDirectionChanged()">
-  <mat-icon *ngIf="!up">keyboard_arrow_up</mat-icon>
-  <mat-icon *ngIf="up">keyboard_arrow_down</mat-icon>
-</button>
+  <div class="in-row in-sale-container">
+    <input id="in-sale" class="in-sale-box" (ngModelChange)="onIsInSaleChanged($event)" [(ngModel)]="isInSale" type="checkbox">
+    <label class="in-sale-label" [for]="'in-sale'">in sale </label>
+  </div>
 </div>
-
-<div class="in-row">
-  <input (ngModelChange)="onIsInSaleChanged($event)" [(ngModel)]="isInSale" type="checkbox">
-  <h5>in sale</h5>
-</div>
-
-
-<!--<div *ngIf="selectedFilter === 'price'" >-->
-<!--  <mat-card class="example-result-card">-->
-<!--    <mat-card-content>-->
-
-<!--      <section class="example-section">-->
-<!--        <label>Min value</label>-->
-<!--        <input matInput type="number" [(ngModel)]="min">-->
-<!--        <label>Max value</label>-->
-<!--        <input matInput type="number" [(ngModel)]="max">-->
-<!--      </section>-->
-
-<!--      <div class="example-label-container">-->
-<!--        <label id="example-name-label" class="example-name-label">Value</label>-->
-<!--        <label class="example-value-label">{{value}}</label>-->
-<!--      </div>-->
-
-<!--      <mat-slider class="example-margin" min="200" max="500" step="0.5" value="1.5" (input)="changeValue($event)" >-->
-<!--        <input type="range" value="300" matSliderStartThumb>-->
-<!--        <input type="range" value="400" matSliderEndThumb>-->
-<!--      </mat-slider>-->
-<!--    </mat-card-content>-->
-<!--  </mat-card>-->
-<!--</div>-->
-
-
-
