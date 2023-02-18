@@ -8,6 +8,7 @@ import {CartState} from '../../cart/cart.state';
 import {Observable} from 'rxjs';
 import {CartItem} from '../../cart/models/cart-item.model';
 import {IdToCartIndex} from '../../cart/models/id-to-cart-index.model';
+import {ModalsService} from '../../ui/components/modals/modals.service';
 
 @Component({
   selector: 'app-product',
@@ -28,7 +29,8 @@ export class ProductComponent {
 
   @Select(CartState.getCartItems) cartItems$: Observable<Array<CartItem>> | undefined;
 
-  constructor(private cartCounterHandlerService: CartCounterHandlerService) { }
+  constructor(private cartCounterHandlerService: CartCounterHandlerService,
+              private modalsService: ModalsService) { }
 
   get isProductInCart(): boolean {
     return this.idToCartIndexMap[this.data.id] != null;
@@ -48,6 +50,16 @@ export class ProductComponent {
   }
 
   onDeleteClicked(): void {
-    this.deleteProduct.emit(this.data);
+    this.modalsService.openConfirmModal(
+      {
+        description: 'you will not be able to restore this item once deleted',
+        confirmBtn: 'delete',
+        height: '250px'
+      }
+    ).afterClosed().subscribe((res) => {
+      if (res === 'confirm') {
+        this.deleteProduct.emit(this.data);
+      }
+    });
   }
 }

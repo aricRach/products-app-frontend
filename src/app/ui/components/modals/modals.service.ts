@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {CartModalComponent} from './cart-modal/cart-modal.component';
 import {ConfirmModalComponent} from './confirm-modal/confirm-modal.component';
+import {DialogContent} from './models/dialog-content.model';
 
 @Injectable({
   providedIn: 'root'
@@ -18,11 +19,16 @@ export class ModalsService {
     });
   }
 
-  openConfirmModal(): MatDialogRef<ConfirmModalComponent> {
+  openConfirmModal(dialogContent: DialogContent): MatDialogRef<ConfirmModalComponent> {
     return this.dialog.open(ConfirmModalComponent, {
-      width: '340px',
-      height: '200px',
+      width: dialogContent.width || '340px',
+      height: dialogContent.height || '200px',
       autoFocus: false,
+      data: {
+        description: dialogContent.description,
+        confirmBtn: dialogContent.confirmBtn,
+        title: dialogContent.title || 'Are you sure?'
+      }
     });
   }
 }
