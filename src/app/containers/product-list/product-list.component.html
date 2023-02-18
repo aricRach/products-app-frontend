@@ -9,7 +9,8 @@
                  [data]="item"
                  [searchTerm]="search.value"
                  [idToCartIndexMap]="idToCartIndexMap"
-                 (btnClicked)="addItem($event)">
+                 (addToCart)="addItem($event)"
+                 (deleteProduct)="deleteProduct($event)">
     </app-product>
   </div>
 </div>

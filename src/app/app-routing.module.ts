@@ -31,6 +31,9 @@ const routes: Routes = [
   { path: 'my-products',
     component: ProductListComponent,
     canActivate: [AuthGuard],
+    data: {
+      myProductMode: true
+    },
     resolve: {
       productsList: MyProductsResolver
     }

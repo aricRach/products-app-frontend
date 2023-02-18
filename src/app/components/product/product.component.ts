@@ -23,7 +23,8 @@ export class ProductComponent {
   @Input() currencyCode = 'INR';
   @Input() searchTerm: string;
 
-  @Output() btnClicked = new EventEmitter();
+  @Output() addToCart = new EventEmitter();
+  @Output() deleteProduct = new EventEmitter();
 
   @Select(CartState.getCartItems) cartItems$: Observable<Array<CartItem>> | undefined;
 
@@ -35,14 +36,18 @@ export class ProductComponent {
 
   addToCartClicked(): void {
     if (this.userAuthenticated) {
-      this.btnClicked.emit(this.data);
+      this.addToCart.emit(this.data);
     } else {
       sessionStorage.setItem('itemToAdd', JSON.stringify(this.data));
-      this.btnClicked.emit(null);
+      this.addToCart.emit(null);
     }
   }
 
   counterClicked(action: CounterAction): void {
     this.cartCounterHandlerService.onCounterClicked(action);
+  }
+
+  onDeleteClicked(): void {
+    this.deleteProduct.emit(this.data);
   }
 }

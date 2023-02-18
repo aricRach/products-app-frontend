@@ -23,4 +23,8 @@ export class ProductApiService {
   geProductById(id: string): Observable<Product> {
     return this.http.get<Product>(this.url + '/single-product/' + +id);
   }
+
+  deleteProduct(id: number): Observable<any> {
+    return this.http.delete(this.url + '/' + id);
+  }
 }

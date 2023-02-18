@@ -93,41 +93,41 @@ export class AddProductComponent implements OnInit, OnDestroy {
     });
   }
 
-  saveDataToStorage(): any {
-    if (this.form.valid) {
-      this.form.disable();
-      const currentFileUpload = new FileUpload(this.fileToUpload);
-      this.fileUploadService.pushFileToStorage(currentFileUpload).subscribe((Percent: number) => {
+  private pushImageToFirebase(productId: number): void {
+    const currentFileUpload = new FileUpload(this.fileToUpload);
+    this.fileUploadService.pushFileToStorage(currentFileUpload, productId).subscribe((Percent: number) => {
         this.imageProcessPercent = Percent;
-        },
-        error => {
-          console.log(error);
-        }
-      );
-    }
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 
   saveProduct(): void {
-    const product = {
-      name: this.form.get('name').value,
-      price: this.conversionPipe.transform(this.form.get('price').value, this.currencyCode, true),
-      discountPercent: this.form.get('isInSale').value ? this.form.get('discountPercent').value : 0,
-      stock: this.form.get('stock').value,
-      image: this.form.get('image').value,
-      userOwner: {
-        userName: this.userService.getUser().userName,
-        email: this.userService.getUser().email
-      }
-    } as ProductBackEnd;
-    if (this.isEditMode) {
-      this.addProductApiService.updateProduct(this.id, product).subscribe(() => {
-        this.doAfterSetProduct();
-      });
+    if (this.form.valid) {
+      this.form.disable();
+      const product = {
+        name: this.form.get('name').value,
+        price: this.conversionPipe.transform(this.form.get('price').value, this.currencyCode, true),
+        discountPercent: this.form.get('isInSale').value ? this.form.get('discountPercent').value : 0,
+        stock: this.form.get('stock').value,
+        image: this.form.get('image').value,
+        userOwner: {
+          userName: this.userService.getUser().userName,
+          email: this.userService.getUser().email
+        }
+      } as ProductBackEnd;
+      if (this.isEditMode) {
+        this.addProductApiService.updateProduct(this.id, product).subscribe(() => {
+          this.pushImageToFirebase(this.id);
+        });
     } else {
-      this.addProductApiService.addProduct(product).subscribe(() => {
-        this.doAfterSetProduct();
+      this.addProductApiService.addProduct(product).subscribe((res: Product) => {
+        this.pushImageToFirebase(res.id);
       });
     }
+   }
   }
 
   toggleIsInSale(): void {
@@ -144,9 +144,14 @@ export class AddProductComponent implements OnInit, OnDestroy {
     this.ownerSubscription?.unsubscribe();
   }
 
-  updateImgUrl(imageUrl: string): void {
-    this.form.get('image').setValue(imageUrl);
-    this.saveProduct();
+  // @ts-ignore
+  updateImgUrl({downloadURL, productId}): void {
+      this.addProductApiService.addImageUrl(downloadURL, productId).subscribe(() => {
+        this.doAfterSetProduct();
+      }, () => {
+        console.error('cant update image');
+        this.doAfterSetProduct();
+      });
   }
 
   markImgController(file: File): void {

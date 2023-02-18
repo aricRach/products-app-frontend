@@ -14,6 +14,7 @@ import {CartState} from '../../cart/cart.state';
 import {IdToCartIndex} from '../../cart/models/id-to-cart-index.model';
 import {SortByOption} from '../../ui/components/search-filters/sort-by-option.model';
 import {PageEvent} from '@angular/material/paginator';
+import {FileUploadService} from '../../upload/file-upload.service';
 
 @Component({
   selector: 'app-product-list',
@@ -42,7 +43,8 @@ export class ProductListComponent implements OnInit, OnDestroy {
   sortByOptions: SortByOption[];
 
   constructor(private productService: ProductService, private activeRoute: ActivatedRoute,
-              private router: Router, private currencyService: CurrencyService, private store: Store, private userService: UserService) {
+              private router: Router, private currencyService: CurrencyService, private store: Store, private userService: UserService,
+              private fileUploadService: FileUploadService) {
     this.currencyCode$ = this.currencyService.currencyObservable;
     this.idToCartIndexMap = {};
     this.cartItems = [];
@@ -52,10 +54,9 @@ export class ProductListComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.subscribeUser();
     this.watchQueryParams();
-    this.setMode();
-    if (!this.isMyProductsMode) {
-      this.subscribeDataChange();
-    }
+    this.isMyProductsMode = this.activeRoute.snapshot.data.myProductMode === true;
+    this.setProductList();
+    this.subscribeDataChange();
     this.subscribeToCartChanges();
   }
 
@@ -89,6 +90,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
   }
 
   getData(): void {
+    if (!this.isMyProductsMode ) {
       this.productService.getProducts(this.userAuthenticated?.email).subscribe(
         (data: Product[]) => {
           console.log('success', data);
@@ -98,6 +100,11 @@ export class ProductListComponent implements OnInit, OnDestroy {
           console.log('error', err);
         }
       );
+    } else {
+      this.productService.getMyProducts().subscribe((data: Product[]) => {
+        this.plist = data;
+      });
+    }
   }
 
   addItem(data: CartItem): void {
@@ -130,12 +137,15 @@ export class ProductListComponent implements OnInit, OnDestroy {
     this.pageSize = pageEvent.pageSize;
   }
 
-  private setMode(): void {
-    this.plist = this.activeRoute.snapshot.data.productsList;
-    if (this.plist != null) {
-      this.isMyProductsMode = true;
-    } else {
-      this.plist = [];
-    }
+  private setProductList(): void {
+    this.plist = this.isMyProductsMode ? this.activeRoute.snapshot.data.productsList : [];
+  }
+
+  deleteProduct(product: Product): void {
+    this.fileUploadService.deleteFileStorage(product.id);
+    this.subscriber.add(this.productService.deleteProduct(product.id).subscribe(() => {
+      console.log('product deleted');
+      this.getData();
+    }));
   }
 }

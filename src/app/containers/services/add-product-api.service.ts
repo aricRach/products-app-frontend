@@ -17,4 +17,8 @@ export class AddProductApiService {
   addProduct(product: ProductBackEnd): Observable<any> {
     return this.http.post('http://localhost:8083/api/v1/products', product);
   }
+
+  addImageUrl(downloadURL: string, productId: number): Observable<any>  {
+    return this.http.patch(`http://localhost:8083/api/v1/products/add-image-url/${productId}`, downloadURL);
+  }
 }

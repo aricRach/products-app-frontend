@@ -10,7 +10,7 @@ import {Subscription} from 'rxjs';
 export class UploadFormComponent implements OnInit, OnDestroy {
 
   @Input() percent: number;
-  @Output() fileUploaded = new EventEmitter<string>();
+  @Output() fileUploaded = new EventEmitter();
   @Output() fileSelected = new EventEmitter<File>();
   selectedFiles: FileList;
   private subscription: Subscription;
