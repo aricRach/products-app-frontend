@@ -12,15 +12,15 @@
 
   </div>
   <div *ngIf="!isMyProductsMode; else myProductMode">
-  <button [hidden]="isProductInCart" class="btn btn-primary btn-sm w-100" (click)="addToCartClicked()" *ngIf="data.stock>0; else stock">add to cart</button>
+  <button [hidden]="isProductInCart" class="active-btn action-btn" (click)="addToCartClicked()" *ngIf="data.stock>0; else stock">add to cart</button>
   <app-counter [numberOfItems]="(cartItems$ | async)[idToCartIndexMap[data.id]]?.numberOfItems" (counterClicked)="counterClicked($event)" [id]="data.id" *ngIf="isProductInCart"></app-counter>
   </div>
 </div>
 
 
 <ng-template #myProductMode>
-  <a [ngClass]="{'alert-stock': data.stock === 0 }" [routerLink]="['/edit-product', data.id]" class="btn btn-primary btn-sm w-100">edit</a>
-  <button (click)="onDeleteClicked()">delete</button>
+  <a [ngClass]="{'alert-stock': data.stock === 0 }" [routerLink]="['/edit-product', data.id]" class=" active-btn link-btn">edit</a>
+  <button class="active-btn alert-btn" (click)="onDeleteClicked()">delete</button>
 </ng-template>
 
 <ng-template #stock>
