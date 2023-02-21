@@ -1,10 +1,10 @@
 <button *ngIf="isAuthenticated; else login"
-        class="btn btn-link"
+        class="active-btn link-btn mrg"
         (click)="logout()">
   Logout
 </button>
 
 <ng-template #login>
-  <button class="btn btn-link" routerLink="/login">login</button>
-  <button class="btn btn-link" routerLink="/signup">register</button>
+  <button class="active-btn link-btn mrg" routerLink="/login">login</button>
+  <button class="active-btn link-btn mrg" routerLink="/signup">sign up</button>
 </ng-template>

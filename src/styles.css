@@ -2,6 +2,7 @@
 body {
   min-height: 100%;
 }
+
 .discount {
   text-decoration: line-through;
   color: red;
@@ -92,8 +93,10 @@ mat-icon {
   border: 1px solid;
   padding: 5px;
   margin-bottom: 3px;
-  width: 60px;
+  width: 65px;
   text-align: center;
+  color: #0d6efd;
+  background-color: white;
 }
 
 .disabled {
@@ -118,3 +121,13 @@ mat-icon {
   cursor: pointer;
 }
 
+.vertical-center {
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.mrg {
+  margin: 5px;
+}

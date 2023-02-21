@@ -1,21 +1,27 @@
-<form [formGroup]="loginForm" (submit)="doLogin()">
-  <small class="text-danger my-4" *ngIf="errorMessage">
-    {{errorMessage}}
-  </small>
-  <div class="form-group">
-    <input
-    type="email"
-    class="form-control" placeholder="email" formControlName="email"
-    >
-  </div>
+<div class="vertical-center">
+<div class="auth-form">
+  <form [formGroup]="loginForm" (submit)="doLogin()">
+    <small class="" *ngIf="errorMessage">
+      {{errorMessage}}
+    </small>
+    <div class="form-group">
+      <input
+      type="email"
+      class="form-control" placeholder="email" formControlName="email"
+      >
+    </div>
 
-  <div class="form-group">
-    <input
-    type="password"
-    formControlName="password"
-    class="form-control"
-    placeholder="password"
-    >
-  </div>
-  <button type="submit" class="btn btn-success btn-sm w-100">Login</button>
-</form>
+    <div class="form-group">
+      <input
+      type="password"
+      formControlName="password"
+      class="form-control"
+      placeholder="password"
+      >
+    </div>
+    <div class="auth-btn">
+    <button type="submit" class="active-btn submit-btn">Login</button>
+    </div>
+  </form>
+</div>
+</div>

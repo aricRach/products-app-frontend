@@ -5,6 +5,7 @@
 
 .middle {
   flex: 1;
+  min-width: 100px;
 }
 
 .left-side {
@@ -15,5 +16,5 @@
 .right-side {
   flex: 1;
   justify-content: end;
-  min-width: 200px;
+  min-width: 170px;
 }
