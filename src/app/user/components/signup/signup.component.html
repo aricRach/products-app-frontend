@@ -1,4 +1,6 @@
-<form [formGroup]="signUpForm" (submit)="doSignUp()">
+<div class="vertical-center">
+  <div class="auth-form">
+    <form [formGroup]="signUpForm" (submit)="doSignUp()">
   <small class="text-danger my-4" *ngIf="errorMessage">
     {{errorMessage}}
   </small>
@@ -23,5 +25,9 @@
       placeholder="password"
     >
   </div>
-  <button type="submit" class="btn btn-success btn-sm w-100">Register</button>
-</form>
+  <div class="horizontal-center">
+      <button type="submit" class="active-btn submit-btn">Register</button>
+  </div>
+    </form>
+  </div>
+</div>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import {UserService} from '../../services/user.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
@@ -9,9 +9,9 @@ import {Product} from '../../../../types';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./../authentication-styles.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
 
   loginForm = new FormGroup({
     email: new FormControl(null, [Validators.required]),
@@ -21,9 +21,6 @@ export class LoginComponent implements OnInit {
     );
   errorMessage!: string;
   constructor(private userService: UserService, private router: Router, private store: Store) { }
-
-  ngOnInit(): void {
-  }
 
   doLogin(): void {
     if (this.loginForm.valid) {

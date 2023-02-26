@@ -1,0 +1,30 @@
+.auth-form {
+  border: 1px solid;
+  border-radius: 15%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  flex-basis: 300px;
+  width: 500px;
+}
+
+.auth-btn {
+  display: flex;
+  justify-content: center;
+}
+
+input {
+  margin: 10px 0;
+  width: 380px;
+}
+
+@media only screen and (max-width: 700px) {
+  input {
+    width: 200px;
+  }
+  .auth-form {
+    width: 300px;
+    max-height: 250px;
+  }
+}

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {UserService} from '../../services/user.service';
 import {Router} from '@angular/router';
@@ -7,9 +7,9 @@ import {HttpClient} from '@angular/common/http';
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
-  styleUrls: ['./signup.component.css']
+  styleUrls: ['./../authentication-styles.css']
 })
-export class SignupComponent implements OnInit {
+export class SignupComponent {
 
   signUpForm = new FormGroup({
       userName: new FormControl(null, [Validators.required]),
@@ -20,9 +20,6 @@ export class SignupComponent implements OnInit {
   );
   errorMessage!: string;
   constructor(private userService: UserService, private router: Router, private http: HttpClient) { }
-
-  ngOnInit(): void {
-  }
 
   doSignUp(): void {
     if (this.signUpForm.valid) {
