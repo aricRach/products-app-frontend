@@ -3,8 +3,8 @@
     <label>Name</label>
     <input type="text" appUppercase formControlName="name" class="form-control">
     <div *ngIf="userForm.get('name')?.touched">
-      <small *ngIf="userForm.get('name')?.hasError('required')">Name is required</small>
-      <small *ngIf="userForm.get('name')?.hasError('minlength')">the minimum length is 2</small>
+      <small class="field-error" *ngIf="userForm.get('name')?.hasError('required')">Name is required</small>
+      <small class="field-error" *ngIf="userForm.get('name')?.hasError('minlength')">the minimum length is 2</small>
     </div>
   </div>
   <div class="form-group">
@@ -29,7 +29,7 @@
     <div class="form-group col-md-4">
       <label>Zipcode</label>
       <input type="text" formControlName="zipcode" class="form-control">
-      <small *ngIf="userForm.get('address')?.get('zipcode')?.hasError('zipCode')">
+      <small class="field-error" *ngIf="userForm.get('address')?.get('zipcode')?.hasError('zipCode')">
        Only Allowed zipCode is:  {{userForm.get('address')?.get('zipcode')?.getError('zipCode')?.allowedCode}}
       </small>
     </div>

@@ -13,8 +13,8 @@
     />
   </div>
   <div *ngIf="name.touched">
-    <small *ngIf="name.hasError('required')">Name is required</small>
-    <small *ngIf="name.hasError('minlength')">the minimum length is 5</small>
+    <small class="field-error" *ngIf="name.hasError('required')">Name is required</small>
+    <small class="field-error" *ngIf="name.hasError('minlength')">the minimum length is 5</small>
   </div>
   <div>
     <label>Age</label>

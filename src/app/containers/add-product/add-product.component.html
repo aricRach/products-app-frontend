@@ -5,8 +5,8 @@
     <label>Name</label>
     <input type="text" appUppercase formControlName="name" class="form-control">
     <div *ngIf="form?.get('name')?.touched">
-      <small *ngIf="form.get('name')?.hasError('required')">Name is required</small>
-      <small *ngIf="form.get('name')?.hasError('minlength')">the minimum length is 2</small>
+      <small class="field-error" *ngIf="form.get('name')?.hasError('required')">Name is required</small>
+      <small class="field-error" *ngIf="form.get('name')?.hasError('minlength')">the minimum length is 2</small>
     </div>
     <label>owner</label>
     <input type="text" class="form-control" [readOnly]="true" [value]="owner">
@@ -16,13 +16,13 @@
     <div class="form-group">
       <label>price in {{currencyCode}}</label>
       <input [min]="0" type="number" formControlName="price" class="form-control">
-      <small *ngIf="form.get('price')?.hasError('min')">Can't set negative number</small>
+      <small class="field-error" *ngIf="form.get('price')?.hasError('min')">Can't set negative number</small>
     </div>
 
     <div *ngIf="isInSale" class="form-group">
       <label>discount in percent</label>
       <input [max]="100" [min]="0" type="number" formControlName="discountPercent" class="form-control">
-      <small *ngIf="form.get('discountPercent')?.hasError('min')">Can't set negative number</small>
+      <small class="field-error" *ngIf="form.get('discountPercent')?.hasError('min')">Can't set negative number</small>
     </div>
 
     <div class="form-group">
@@ -39,7 +39,7 @@
   <div class="form-group">
     <label>stock</label>
     <input [min]="0" type="number" formControlName="stock" class="form-control">
-    <small *ngIf="form.get('stock')?.hasError('min')">Can't set negative number</small>
+    <small class="field-error" *ngIf="form.get('stock')?.hasError('min')">Can't set negative number</small>
   </div>
 
   <div class="form-group">

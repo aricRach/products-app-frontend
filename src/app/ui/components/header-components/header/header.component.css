@@ -1,6 +1,6 @@
 .header {
-  background-color: #fff9f0;
   margin-bottom: 20px;
+  background-color: #fff9f0;
 }
 
 .middle {
@@ -17,4 +17,8 @@
   flex: 1;
   justify-content: end;
   min-width: 170px;
+}
+
+:host ::ng-deep button {
+  background-color: #fff9f0;
 }

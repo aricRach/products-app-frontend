@@ -3,3 +3,18 @@
    margin: 0;
   }
 }
+
+.user-buttons {
+  display: block;
+  margin: auto;
+}
+
+.link-btn {
+  width: 80px;
+  border: none;
+}
+
+::ng-deep .mat-menu-panel {
+  margin-top: 5px;
+  margin-right: 1px;
+}

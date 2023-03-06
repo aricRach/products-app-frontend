@@ -1,8 +1,12 @@
-<button *ngIf="isAuthenticated; else login"
-        class="active-btn link-btn mrg"
-        (click)="logout()">
-  Logout
-</button>
+<button *ngIf="isAuthenticated; else login" class="icon-button active-btn mrg-left" [matMenuTriggerFor]="menu"><mat-icon>account_circle</mat-icon></button>
+<mat-menu #menu="matMenu">
+  <a class="active-btn link-btn nav-item user-buttons" [routerLink]="['/change-password']">change password</a>
+  <button class="active-btn link-btn nav-item user-buttons"
+          (click)="logout()">
+    Logout
+  </button>
+</mat-menu>
+
 
 <ng-template #login>
   <button class="active-btn link-btn mrg" routerLink="/login">login</button>

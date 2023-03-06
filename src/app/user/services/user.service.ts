@@ -27,6 +27,10 @@ export class UserService {
     return this.userApiService.signUpFireBase(email, password);
   }
 
+  changePassword(newPassword: string, token: string): Observable<any> {
+    return this.userApiService.changePassword(newPassword, token);
+  }
+
   createUserSession(user: any): void {
     this._user = user;
     this.notify();
@@ -51,6 +55,7 @@ export class UserService {
   }
 
   public getUser(): User {
+    this._user = JSON.parse(localStorage.getItem('user') as any);
     return this._user;
   }
 }

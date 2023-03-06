@@ -21,4 +21,10 @@ export class UserApiService {
     const data = {email, password, returnSecureToken: true};
     return this.httpClient.post(url, data);
   }
+
+  changePassword(password: string, idToken: string): Observable<any> {
+    const url = `https://identitytoolkit.googleapis.com/v1/accounts:update?key=${environment.apiKey}`;
+    const data = {idToken, password, returnSecureToken: true};
+    return this.httpClient.post(url, data);
+  }
 }

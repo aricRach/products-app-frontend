@@ -122,7 +122,7 @@ mat-icon {
 }
 
 .vertical-center {
-  height: 80vh;
+  height: 55vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -135,4 +135,21 @@ mat-icon {
 
 .mrg {
   margin: 5px;
+}
+
+.mrg-left {
+  margin-left: 5px;
+}
+
+.mrg-right {
+  margin-left: 5px;
+}
+
+.field-error {
+  color: #f44336;
+}
+
+.icon-button {
+  border: none;
+  height: 30px;
 }

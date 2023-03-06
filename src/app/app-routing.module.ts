@@ -16,13 +16,15 @@ import {OrdersComponent} from './containers/orders-history/components/orders/ord
 import {SignupComponent} from './user/components/signup/signup.component';
 import {UserOwnerGuard} from './user/guards/user-owner.guard';
 import {MyProductsResolver} from './resolvers/my-products.resolver';
-
+import {ChangePasswordComponent} from './user/components/change-password/change-password.component';
+import {NotLoggedInGuard} from './user/guards/not-logged-in.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'products', pathMatch: 'full'},
   { path: 'github', component: GithubSearchComponent},
-  { path: 'login', component: LoginComponent}, // guard not loggedin
-  { path: 'signup', component: SignupComponent}, // guard not loggedin
+  { path: 'login', component: LoginComponent, canActivate: [NotLoggedInGuard]},
+  { path: 'signup', component: SignupComponent, canActivate: [NotLoggedInGuard]},
+  { path: 'change-password', component: ChangePasswordComponent, canActivate: [AuthGuard]},
   // { // load the order routing module --> lazy loading!
   //   path: 'orders',
   //   loadChildren: () => import('./orders/orders.module').then(m => m.OrdersModule)

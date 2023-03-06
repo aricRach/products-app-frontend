@@ -9,7 +9,7 @@
   </a>
 </nav>
 
-<button class="nav-button" mat-button [matMenuTriggerFor]="menu"><mat-icon>menu</mat-icon></button>
+<button class="nav-button icon-button active-btn" [matMenuTriggerFor]="menu"><mat-icon>menu</mat-icon></button>
 <mat-menu #menu="matMenu">
     <a class=nav-item [routerLinkActive]="['active']" *ngFor="let nav of navItems" mat-menu-item [routerLink]=nav.link>{{nav.text}} </a>
 </mat-menu>
