@@ -1,22 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import {CurrencyService} from '../currency.service';
+import * as currencies from '../currencies-img.json';
 
 @Component({
   selector: 'app-currency',
   templateUrl: './currency.component.html',
   styleUrls: ['./currency.component.css']
 })
-export class CurrencyComponent implements OnInit {
+export class CurrencyComponent {
 
-  codes = ['INR', 'USD', 'CAD', 'GBP', 'EUR'];
-  constructor(private  currencyService: CurrencyService) { }
+  images = (currencies as any).default;
+  codes = [
+    {value: 'INR', img: this.images.INR},
+    {value: 'USD', img: this.images.USD},
+    {value: 'EUR', img: this.images.EUR}
+    ];
+  constructor(private  currencyService: CurrencyService) {}
 
-  ngOnInit(): void {
-  }
-
-  changeCurrency(event: Event): void {
-    const element = event.target as HTMLSelectElement;
-    this.currencyService.updateCurrency(element.value);
+  changeCurrency(currency: string): void {
+    this.currencyService.updateCurrency(currency);
   }
 
 }

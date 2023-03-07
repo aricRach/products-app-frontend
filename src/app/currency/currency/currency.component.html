@@ -1,3 +1,9 @@
-<select class="me-2 form-control-sm" (change)="changeCurrency($event)">
-  <option *ngFor="let c of codes">{{c}}</option>
-</select>
+<button [matMenuTriggerFor]="menu" class="mrg icon-button">
+  <img [src]="images.currencyExchange" alt="">
+  <mat-menu xPosition="before" #menu="matMenu">
+  <button (click)="changeCurrency(code.value)" *ngFor="let code of codes" mat-menu-item>
+    <img class="mrg" [src]="code.img" alt="">
+    <span>{{code.value}}</span>
+  </button>
+</mat-menu>
+</button>
