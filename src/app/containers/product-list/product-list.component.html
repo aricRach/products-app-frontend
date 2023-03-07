@@ -1,18 +1,18 @@
-
-<app-search-filters [sortByOptions] = sortByOptions (isInSaleChanged)="filterIsInSale($event)" (sortByChanged)="onSortByChanged($event)" (sortDirectionChanged)="onSortDirectionChanged($event)"></app-search-filters>
-<div class="in-row wrap" *ngIf="currencyCode$ | async; let code">
-  <div class="flex-item item" *ngFor="let item of plist | filterBy: ['name', 'isInSale'] : [search.value, isInSaleProducts]
-  | sort : sortBy : isUpSortDirection | slice :currentPageIndex * pageSize  : pageSize * (currentPageIndex + 1)" appShadowEffect>
-    <app-product [isMyProductsMode]="isMyProductsMode"
-                 [userAuthenticated]="userAuthenticated"
-                 [currencyCode]="code"
-                 [data]="item"
-                 [searchTerm]="search.value"
-                 [idToCartIndexMap]="idToCartIndexMap"
-                 (addToCart)="addItem($event)"
-                 (deleteProduct)="deleteProduct($event)">
-    </app-product>
+<div class="main-page">
+  <app-search-filters [sortByOptions] = sortByOptions (isInSaleChanged)="filterIsInSale($event)" (sortByChanged)="onSortByChanged($event)" (sortDirectionChanged)="onSortDirectionChanged($event)"></app-search-filters>
+  <div class="in-row wrap" *ngIf="currencyCode$ | async; let code">
+    <div class="flex-item item" *ngFor="let item of plist | filterBy: ['name', 'isInSale'] : [search.value, isInSaleProducts]
+    | sort : sortBy : isUpSortDirection | slice :currentPageIndex * pageSize  : pageSize * (currentPageIndex + 1)" appShadowEffect>
+      <app-product [isMyProductsMode]="isMyProductsMode"
+                   [userAuthenticated]="userAuthenticated"
+                   [currencyCode]="code"
+                   [data]="item"
+                   [searchTerm]="search.value"
+                   [idToCartIndexMap]="idToCartIndexMap"
+                   (addToCart)="addItem($event)"
+                   (deleteProduct)="deleteProduct($event)">
+      </app-product>
+    </div>
   </div>
 </div>
-
-<app-footer [productsLength]="plist.length" (pageChanged)="onPageChanged($event)"></app-footer>
+  <app-footer [productsLength]="plist.length" (pageChanged)="onPageChanged($event)"></app-footer>
