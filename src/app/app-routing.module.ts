@@ -18,6 +18,7 @@ import {UserOwnerGuard} from './user/guards/user-owner.guard';
 import {MyProductsResolver} from './resolvers/my-products.resolver';
 import {ChangePasswordComponent} from './user/components/change-password/change-password.component';
 import {NotLoggedInGuard} from './user/guards/not-logged-in.guard';
+import {ResetPasswordComponent} from './user/components/reset-password/reset-password.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'products', pathMatch: 'full'},
@@ -25,6 +26,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent, canActivate: [NotLoggedInGuard]},
   { path: 'signup', component: SignupComponent, canActivate: [NotLoggedInGuard]},
   { path: 'change-password', component: ChangePasswordComponent, canActivate: [AuthGuard]},
+  { path: 'reset-password', component: ResetPasswordComponent, canActivate: [NotLoggedInGuard]},
   // { // load the order routing module --> lazy loading!
   //   path: 'orders',
   //   loadChildren: () => import('./orders/orders.module').then(m => m.OrdersModule)

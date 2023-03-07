@@ -52,6 +52,7 @@ mat-icon {
   border: none;
   padding: 5px 8px;
   transition: color 0.5s, background-color 0.5s;
+  cursor: pointer;
 }
 
 .active-btn:hover {
@@ -152,4 +153,8 @@ mat-icon {
 .icon-button {
   border: none;
   height: 30px;
+}
+
+.small {
+  font-size: 12px;
 }

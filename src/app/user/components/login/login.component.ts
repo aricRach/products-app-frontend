@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {UserService} from '../../services/user.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {Store} from '@ngxs/store';
 import {AddToCart} from '../../../cart/cart-actions.actions';
 import {Product} from '../../../../types';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
@@ -17,10 +18,19 @@ export class LoginComponent {
     email: new FormControl(null, [Validators.required]),
     password: new FormControl(null, [Validators.required])
   },
-    {updateOn: 'blur'}
+    {updateOn: 'change'}
     );
   errorMessage!: string;
-  constructor(private userService: UserService, private router: Router, private store: Store) { }
+  constructor(private userService: UserService, private router: Router, private store: Store, private snackBar: MatSnackBar) {
+    this.showMessage();
+  }
+
+  private showMessage(): void {
+    const message = this.router.getCurrentNavigation()?.extras?.state?.message;
+    if (message) {
+      this.snackBar.open(message,  '', {panelClass: 'notification'});
+    }
+  }
 
   doLogin(): void {
     if (this.loginForm.valid) {
@@ -47,5 +57,4 @@ export class LoginComponent {
       );
     }
   }
-
 }

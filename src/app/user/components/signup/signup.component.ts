@@ -16,7 +16,7 @@ export class SignupComponent {
       email: new FormControl(null, [Validators.required]),
       password: new FormControl(null, [Validators.required])
     },
-    {updateOn: 'blur'}
+    {updateOn: 'change'}
   );
   errorMessage!: string;
   constructor(private userService: UserService, private router: Router, private http: HttpClient) { }

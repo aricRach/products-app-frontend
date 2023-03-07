@@ -22,10 +22,7 @@ import { SearchFiltersComponent } from './components/search-filters/search-filte
 import {MatSliderModule} from '@angular/material/slider';
 import {MatCardModule} from '@angular/material/card';
 import {MatIconModule} from '@angular/material/icon';
-import {MatListModule} from '@angular/material/list';
-import {MatSidenavModule} from '@angular/material/sidenav';
-import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatTabGroup, MatTabsModule} from '@angular/material/tabs';
+import {MatTabsModule} from '@angular/material/tabs';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatPaginatorModule} from '@angular/material/paginator';
 
@@ -51,7 +48,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
       PipesModule, CurrencyModule, UserModule, MatSnackBarModule, FormsModule,
       MatSliderModule, MatCardModule, MatIconModule, MatTabsModule, MatMenuModule, MatPaginatorModule
     ],
-  providers: [{provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2500}}],
+  providers: [{provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2000}}],
     exports: [
       HeaderComponent,
       FooterComponent,

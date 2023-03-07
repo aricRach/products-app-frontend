@@ -25,6 +25,16 @@ input {
   justify-content: center;
 }
 
+::ng-deep snack-bar-container.notification{
+    margin: 0;
+    position: fixed;
+    top: 10%;
+    left: 39%;
+    background-color: #46c946 !important;
+    border-radius: 5% !important;
+}
+
+
 @media only screen and (max-width: 700px) {
   input {
     width: 200px;

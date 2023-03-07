@@ -20,7 +20,7 @@ export class ChangePasswordComponent implements OnInit {
       newPassword2: new FormControl(null, [Validators.required]),
     },
     {
-      updateOn: 'blur',
+      updateOn: 'change',
       validators: checkFieldsMatch('newPassword', 'newPassword2')
     }
   );
@@ -40,7 +40,7 @@ export class ChangePasswordComponent implements OnInit {
 
   changePassword(): void {
       const {newPassword} = this.changePassForm.value;
-      this.userService.changePassword(newPassword, this.userService.getUser().idToken).subscribe((user: User) => {
+      this.userService.changePassword(newPassword).subscribe((user: User) => {
         console.log('password changed');
         this.userService.createUserSession(user);
         this.changePassForm.reset();

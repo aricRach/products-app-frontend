@@ -27,4 +27,10 @@ export class UserApiService {
     const data = {idToken, password, returnSecureToken: true};
     return this.httpClient.post(url, data);
   }
+
+  forgetPassword(email: string): Observable<any> {
+    const url = `https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=${environment.apiKey}`;
+    const data = {requestType: 'PASSWORD_RESET', email};
+    return this.httpClient.post(url, data);
+  }
 }

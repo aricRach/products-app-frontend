@@ -27,8 +27,12 @@ export class UserService {
     return this.userApiService.signUpFireBase(email, password);
   }
 
-  changePassword(newPassword: string, token: string): Observable<any> {
-    return this.userApiService.changePassword(newPassword, token);
+  changePassword(newPassword: string): Observable<any> {
+    return this.userApiService.changePassword(newPassword, this._user.idToken);
+  }
+
+  forgetPassword(email: string): Observable<any> {
+    return this.userApiService.forgetPassword(email);
   }
 
   createUserSession(user: any): void {
