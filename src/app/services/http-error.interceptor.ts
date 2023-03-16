@@ -7,10 +7,11 @@ import {
 } from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
 import {catchError} from 'rxjs/operators';
+import {UserService} from '../user/services/user.service';
 
 @Injectable()
 export class HttpErrorInterceptor implements HttpInterceptor {
-  constructor() {}
+  constructor(private userService: UserService) {}
 
   intercept(
     request: HttpRequest<unknown>,
@@ -22,6 +23,11 @@ export class HttpErrorInterceptor implements HttpInterceptor {
     if (request.url.includes('/user')) {
       // user
     }
+    request = request.clone({
+      setHeaders: {
+        Authorization: `${this.userService.getUser()?.idToken}`
+      }
+    });
     return next.handle(request).pipe(
       catchError((error: HttpErrorResponse) => {
         console.log('ERROR interception', error); // error logging

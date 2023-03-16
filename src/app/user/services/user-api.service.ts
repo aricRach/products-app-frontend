@@ -33,4 +33,9 @@ export class UserApiService {
     const data = {requestType: 'PASSWORD_RESET', email};
     return this.httpClient.post(url, data);
   }
+
+  setToken(user: { email: any; token: any }): Observable<any> {
+    const url = `http://localhost:8083/api/v1/user/set-token`;
+    return this.httpClient.post(url, user);
+  }
 }

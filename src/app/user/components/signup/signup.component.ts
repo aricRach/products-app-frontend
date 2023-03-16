@@ -30,6 +30,7 @@ export class SignupComponent {
           this.http.post('http://localhost:8083/api/v1/user', {
             userName,
             email,
+            token: data.idToken
           }).subscribe(() => {
             this.errorMessage = '';
             this.userService.createUserSession(data);

@@ -62,4 +62,8 @@ export class UserService {
     this._user = JSON.parse(localStorage.getItem('user') as any);
     return this._user;
   }
+
+  setToken(data: any): Observable<any> {
+    return this.userApiService.setToken({email: data.email, token: data.idToken});
+  }
 }

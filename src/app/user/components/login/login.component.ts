@@ -38,17 +38,19 @@ export class LoginComponent {
       this.userService.login(email, password).subscribe(
         (data: any) => {
           console.log('success', data);
-          this.errorMessage = '';
-          this.userService.createUserSession(data);
-          const addToCartItem = sessionStorage.getItem('itemToAdd');
-          if (addToCartItem) {
-            const item = JSON.parse(addToCartItem) as Product;
-            if (email !== item.userOwner) {
-              this.store.dispatch(new AddToCart(JSON.parse(addToCartItem)));
-              sessionStorage.setItem('itemToAdd', null);
+          this.userService.setToken(data).subscribe(() => {
+            this.errorMessage = '';
+            this.userService.createUserSession(data);
+            const addToCartItem = sessionStorage.getItem('itemToAdd');
+            if (addToCartItem) {
+              const item = JSON.parse(addToCartItem) as Product;
+              if (email !== item.userOwner) {
+                this.store.dispatch(new AddToCart(JSON.parse(addToCartItem)));
+                sessionStorage.setItem('itemToAdd', null);
+              }
             }
-          }
-          this.router.navigate(['/']);
+            this.router.navigate(['/']);
+          });
         },
         (err) => {
           console.log('error', err);
