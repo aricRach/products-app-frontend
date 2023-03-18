@@ -7,12 +7,10 @@ import {ModelDrivenComponent} from './forms/model-driven/model-driven.component'
 import {TemplateDrivenComponent} from './forms/template-driven/template-driven.component';
 import {DynamicFormsComponent} from './forms/dynamic-forms/dynamic-forms.component';
 import {ProductDetailComponent} from './containers/product-detail/product-detail.component';
-import {GithubSearchComponent} from './search/github-search/github-search.component';
 import {LoginComponent} from './user/components/login/login.component';
 import {AuthGuard} from './user/guards/auth.guard';
 import {AddProductComponent} from './containers/add-product/add-product.component';
 import {ExitFormGuard} from './ui/components/modals/exit-form.guard';
-import {OrdersComponent} from './containers/orders-history/components/orders/orders.component';
 import {SignupComponent} from './user/components/signup/signup.component';
 import {UserOwnerGuard} from './user/guards/user-owner.guard';
 import {MyProductsResolver} from './resolvers/my-products.resolver';
@@ -22,15 +20,10 @@ import {ResetPasswordComponent} from './user/components/reset-password/reset-pas
 
 const routes: Routes = [
   { path: '', redirectTo: 'products', pathMatch: 'full'},
-  { path: 'github', component: GithubSearchComponent},
   { path: 'login', component: LoginComponent, canActivate: [NotLoggedInGuard]},
   { path: 'signup', component: SignupComponent, canActivate: [NotLoggedInGuard]},
   { path: 'change-password', component: ChangePasswordComponent, canActivate: [AuthGuard]},
   { path: 'reset-password', component: ResetPasswordComponent, canActivate: [NotLoggedInGuard]},
-  // { // load the order routing module --> lazy loading!
-  //   path: 'orders',
-  //   loadChildren: () => import('./orders/orders.module').then(m => m.OrdersModule)
-  // },
   { path: 'products', component: ProductListComponent},
   { path: 'my-products',
     component: ProductListComponent,
@@ -43,7 +36,8 @@ const routes: Routes = [
     }
   },
   { path: 'detail/:pid', component: ProductDetailComponent},
-  { path: 'orders', component: OrdersComponent, canActivate: [AuthGuard]},
+  { path: 'orders', loadChildren: () => import('./containers/orders-history/orders.module').then(m => m.OrdersModule),
+    canActivate: [AuthGuard]},
   { path: 'forms', children: [
       {path: '', redirectTo: 'model', pathMatch: 'full'},
       {path: 'model', component: ModelDrivenComponent, canActivate: [AuthGuard]},
