@@ -15,7 +15,7 @@
           <h6>{{item.finalPrice | conversion:currencyCode | currency: currencyCode}}</h6>
         </div>
         </div>
-        <button (click)="removeFromCart(item)">delete</button>
+        <mat-icon (click)="removeFromCart(item)">delete</mat-icon>
       </div>
       <app-counter [id]="item.id" (counterClicked)="onCounterClicked($event)" [numberOfItems]="item.numberOfItems"></app-counter>
   </div>

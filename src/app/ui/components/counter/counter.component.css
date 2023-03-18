@@ -1,7 +1,13 @@
 .counter {
   display: flex;
+  padding: 5px;
+  border-radius: 15%;
+  border: groove;
 }
 
 button {
   border-radius: 50%;
+  border: none;
+  margin: 0 5px;
+  padding-bottom: 4px;
 }
