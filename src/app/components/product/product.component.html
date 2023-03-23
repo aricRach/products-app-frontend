@@ -1,5 +1,5 @@
 <div class="p-4 justify-center align-items-center d-flex flex-column">
-  <a [routerLink]="['/detail', data.id]">
+  <a [routerLink]="['/products/detail', data.id]">
   <img width="200" height="200" [src]="data.image" class="img-thumbnail">
   </a>
 
@@ -20,7 +20,7 @@
 
 <ng-template #myProductMode>
   <div class="in-row">
-  <a [ngClass]="{'alert-stock': data.stock === 0 }" [routerLink]="['/edit-product', data.id]" class="active-btn link-btn m-1">edit</a>
+  <a [ngClass]="{'alert-stock': data.stock === 0 }" [routerLink]="['/products/edit-product', data.id]" class="active-btn link-btn m-1">edit</a>
   <button class="active-btn alert-btn m-1" (click)="onDeleteClicked()">delete</button>
   </div>
 </ng-template>

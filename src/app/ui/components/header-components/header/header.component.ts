@@ -29,9 +29,9 @@ export class HeaderComponent implements OnInit, OnDestroy{
   setNavItems(): void {
     this.navs = [
       { text: 'products', link: '/products', show: true },
-      { text: 'my orders', link: '/orders', show: this.isAuthenticated },
-      { text: 'add product', link: '/add-product', show: this.isAuthenticated },
-      { text: 'my products', link: '/my-products', show: this.isAuthenticated },
+      { text: 'my orders', link: '/products/orders', show: this.isAuthenticated },
+      { text: 'add product', link: '/products/add-product', show: this.isAuthenticated },
+      { text: 'my products', link: '/products/my-products', show: this.isAuthenticated },
     ];
   }
 
