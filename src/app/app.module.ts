@@ -15,7 +15,6 @@ import {UiModule} from './ui/ui.module';
 import { ProductDetailComponent } from './containers/product-detail/product-detail.component';
 import {SearchModule} from './search/search.module';
 import {CurrencyModule} from './currency/currency.module';
-import {UserModule} from './user/user.module';
 import {HttpErrorInterceptor} from './services/http-error.interceptor';
 import {NgxsModule} from '@ngxs/store';
 import {CartState} from './cart/cart.state';
@@ -50,7 +49,6 @@ import {DirectivesModule} from './directives/directives.module';
       UiModule,
       SearchModule,
       CurrencyModule,
-      UserModule,
       PipesModule,
       DirectivesModule,
       NgxsModule.forRoot([CartState]),

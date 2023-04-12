@@ -4,30 +4,30 @@ import {RouterModule, Routes} from '@angular/router';
 import {ProductListComponent} from './containers/product-list/product-list.component';
 import {ErrorPageComponent} from './components/error-page/error-page.component';
 import {ProductDetailComponent} from './containers/product-detail/product-detail.component';
-import {LoginComponent} from './user/components/login/login.component';
 import {AuthGuard} from './user/guards/auth.guard';
 import {AddProductComponent} from './containers/add-product/add-product.component';
 import {ExitFormGuard} from './ui/components/modals/exit-form.guard';
-import {SignupComponent} from './user/components/signup/signup.component';
 import {UserOwnerGuard} from './user/guards/user-owner.guard';
 import {MyProductsResolver} from './resolvers/my-products.resolver';
-import {ChangePasswordComponent} from './user/components/change-password/change-password.component';
-import {NotLoggedInGuard} from './user/guards/not-logged-in.guard';
-import {ResetPasswordComponent} from './user/components/reset-password/reset-password.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'products', pathMatch: 'full'},
-  { path: 'user', children: [
-      { path: '', redirectTo: 'login', pathMatch: 'full'},
-      { path: 'login', component: LoginComponent, canActivate: [NotLoggedInGuard]},
-      { path: 'signup', component: SignupComponent, canActivate: [NotLoggedInGuard]},
-      { path: 'change-password', component: ChangePasswordComponent, canActivate: [AuthGuard]},
-      { path: 'reset-password', component: ResetPasswordComponent, canActivate: [NotLoggedInGuard]},
-  ]},
+  { path: 'user', loadChildren: () => import('./user/user.module').then(m => m.UserModule)},
   {
-    path: 'products', children: [
-      {path: '', component: ProductListComponent, pathMatch: 'full'},
-      { path: 'my-products',
+    path: 'products',
+    children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'all-products'
+      },
+      {
+        path: 'all-products',
+        component: ProductListComponent,
+        pathMatch: 'full'
+      },
+      {
+        path: 'my-products',
         component: ProductListComponent,
         canActivate: [AuthGuard],
         data: {
@@ -37,7 +37,10 @@ const routes: Routes = [
           productsList: MyProductsResolver
         }
       },
-      { path: 'detail/:pid', component: ProductDetailComponent},
+      {
+        path: 'detail/:pid',
+        component: ProductDetailComponent
+      },
       {
         path: 'add-product',
         component: AddProductComponent,

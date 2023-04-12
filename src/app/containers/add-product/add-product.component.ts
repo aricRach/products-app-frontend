@@ -136,7 +136,7 @@ export class AddProductComponent implements OnInit, OnDestroy {
 
   private doAfterSetProduct(): void {
     this.form.reset();
-    this.router.navigate(['/products']);
+    this.router.navigate(['/products', 'my-products']);
   }
 
   ngOnDestroy(): void {

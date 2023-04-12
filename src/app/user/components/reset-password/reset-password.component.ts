@@ -23,7 +23,7 @@ export class ResetPasswordComponent {
 
   onSubmit(): void {
       this.userService.forgetPassword(this.resetPasswordForm.value.email).subscribe(() => {
-        this.router.navigate(['/login'], {state: {
+        this.router.navigate(['/user/login'], {state: {
           message: 'check your inbox for password reset link'
         }});
       }, error => {

@@ -1,4 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {User} from 'firebase';
 
 @Component({
   selector: 'app-login-buttons',
@@ -7,11 +8,11 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 })
 export class LoginButtonsComponent {
 
-  @Input() isAuthenticated = false;
+  @Input() authenticatedUser: User;
 
   @Output() logOutClicked = new EventEmitter();
 
-  constructor() { }
+  constructor() {}
 
   logout(): void {
     this.logOutClicked.emit();

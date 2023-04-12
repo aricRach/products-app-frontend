@@ -1,5 +1,6 @@
-<button *ngIf="isAuthenticated; else login" class="icon-button active-btn mrg-left" [matMenuTriggerFor]="menu"><mat-icon>account_circle</mat-icon></button>
+<button *ngIf="authenticatedUser; else login" class="icon-button active-btn mrg-left" [matMenuTriggerFor]="menu"><mat-icon>account_circle</mat-icon></button>
 <mat-menu #menu="matMenu">
+  <label class="hello-msg">hello {{authenticatedUser.displayName}}</label>
   <a class="active-btn link-btn nav-item user-buttons" [routerLink]="['/user/change-password']">change password</a>
   <button class="active-btn link-btn nav-item user-buttons"
           (click)="logout()">

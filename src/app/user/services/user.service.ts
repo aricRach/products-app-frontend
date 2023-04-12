@@ -64,6 +64,14 @@ export class UserService {
   }
 
   setToken(data: any): Observable<any> {
-    return this.userApiService.setToken({email: data.email, token: data.idToken});
+    return this.userApiService.setToken(data);
+  }
+
+  saveUser(user: User): Observable<any> {
+    return this.userApiService.saveUser(user);
+  }
+
+  updateUserProfileFirebase(userDetails: any): Observable<any> {
+    return this.userApiService.updateUserProfileFirebase(userDetails);
   }
 }

@@ -35,7 +35,7 @@ export class OrdersComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.userEmail = this.userService.getUser().email;
+    this.userEmail = this.userService.getUser()?.email;
     if (this.userEmail) {
       this.ordersApiService.getOrdersHistory(this.userEmail).subscribe((data: any) => {
         this.orders = data;

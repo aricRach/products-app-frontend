@@ -13,7 +13,6 @@ import {PipesModule} from '../pipes/pipes.module';
 import {CartModalComponent} from './components/modals/cart-modal/cart-modal.component';
 import { ConfirmModalComponent } from './components/modals/confirm-modal/confirm-modal.component';
 import {CurrencyModule} from '../currency/currency.module';
-import {UserModule} from '../user/user.module';
 import { NavigationBarComponent } from './components/header-components/navigation-bar/navigation-bar.component';
 import { SearchComponent } from './components/header-components/search/search.component';
 import { CartButtonsComponent } from './components/header-components/cart-buttons/cart-buttons.component';
@@ -25,6 +24,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import {LoginButtonsComponent} from './components/header-components/login-buttons/login-buttons.component';
 
 
 @NgModule({
@@ -38,6 +38,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     SearchComponent,
     CartButtonsComponent,
     SearchFiltersComponent,
+    LoginButtonsComponent,
   ],
     imports: [
         CommonModule, RouterModule, ReactiveFormsModule, BrowserModule,
@@ -45,7 +46,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
       CommonModule,
       MatDialogModule,
       MatButtonModule,
-      PipesModule, CurrencyModule, UserModule, MatSnackBarModule, FormsModule,
+      PipesModule, CurrencyModule, MatSnackBarModule, FormsModule,
       MatSliderModule, MatCardModule, MatIconModule, MatTabsModule, MatMenuModule, MatPaginatorModule
     ],
   providers: [{provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2000}}],

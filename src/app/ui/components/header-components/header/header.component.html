@@ -8,6 +8,6 @@
       <div class="right-side in-row">
         <app-currency></app-currency>
         <app-cart-buttons></app-cart-buttons>
-      <app-login-buttons (logOutClicked)="logout()" [isAuthenticated]="isAuthenticated"></app-login-buttons>
+      <app-login-buttons (logOutClicked)="logout()" [authenticatedUser]="authenticatedUser"></app-login-buttons>
       </div>
     </div>

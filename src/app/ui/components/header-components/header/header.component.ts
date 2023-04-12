@@ -4,6 +4,7 @@ import {Router} from '@angular/router';
 import {Subscription} from 'rxjs';
 import {NavigationItem} from '../models/navigation-item.model';
 import {ProductService} from '../../../../services/product.service';
+import {User} from 'firebase';
 
 @Component({
   selector: 'app-header',
@@ -12,7 +13,7 @@ import {ProductService} from '../../../../services/product.service';
 })
 export class HeaderComponent implements OnInit, OnDestroy{
 
-  isAuthenticated: boolean;
+  authenticatedUser: User;
   private subscriber = new Subscription();
   navs: NavigationItem[];
 
@@ -21,17 +22,17 @@ export class HeaderComponent implements OnInit, OnDestroy{
   ngOnInit(): void {
     this.subscriber.add(this.userService.userObservable.subscribe(
       (user) => {
-        this.isAuthenticated = !!user;
+        this.authenticatedUser = user;
         this.setNavItems();
       }));
   }
 
   setNavItems(): void {
     this.navs = [
-      { text: 'products', link: '/products', show: true },
-      { text: 'my orders', link: '/products/orders', show: this.isAuthenticated },
-      { text: 'add product', link: '/products/add-product', show: this.isAuthenticated },
-      { text: 'my products', link: '/products/my-products', show: this.isAuthenticated },
+      { text: 'products', link: '/products/all-products', show: true },
+      { text: 'my orders', link: '/products/orders', show: !!this.authenticatedUser },
+      { text: 'add product', link: '/products/add-product', show: !!this.authenticatedUser },
+      { text: 'my products', link: '/products/my-products', show: !!this.authenticatedUser },
     ];
   }
 

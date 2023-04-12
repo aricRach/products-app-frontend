@@ -23,8 +23,8 @@ export class SearchComponent implements OnInit, OnDestroy {
   watchSearchValueChanges(): void {
     this.subscriber = this.search.valueChanges.subscribe((data: any) => {
       data ?
-        this.router.navigate(['/products'], { queryParams: { search: data } }) :
-        this.router.navigate(['/products']);
+        this.router.navigate(['/products', 'all-products'], { queryParams: { search: data } }) :
+        this.router.navigate(['/products', 'all-products']);
     });
   }
 

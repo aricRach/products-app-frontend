@@ -38,11 +38,13 @@ export class LoginComponent {
       this.userService.login(email, password).subscribe(
         (data: any) => {
           console.log('success', data);
-          this.userService.setToken(data).subscribe(() => {
+          this.userService.setToken(data).subscribe((userName) => {
             this.errorMessage = '';
+            data.displayName = userName;
+            this.userService.updateUserProfileFirebase(data);
             this.userService.createUserSession(data);
             const addToCartItem = sessionStorage.getItem('itemToAdd');
-            if (addToCartItem) {
+            if (addToCartItem && addToCartItem !== 'null') {
               const item = JSON.parse(addToCartItem) as Product;
               if (email !== item.userOwner) {
                 this.store.dispatch(new AddToCart(JSON.parse(addToCartItem)));

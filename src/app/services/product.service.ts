@@ -31,6 +31,6 @@ export class ProductService {
   }
 
   getMyProducts(): Observable<any> {
-    return this.productApiService.getMyProducts(this.userService.getUser().email);
+    return this.productApiService.getMyProducts(this.userService.getUser()?.email);
   }
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {
-  Router, Resolve,
+  Resolve,
   RouterStateSnapshot,
   ActivatedRouteSnapshot
 } from '@angular/router';
@@ -17,6 +17,7 @@ export class MyProductsResolver implements Resolve<Product[]> {
   constructor(private productApiService: ProductApiService, private userService: UserService) {}
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Product[]> {
-     return this.productApiService.getMyProducts(this.userService.getUser().email);
+    const user = this.userService.getUser();
+    return user ? this.productApiService.getMyProducts(user.email) : of([]);
   }
 }

@@ -12,14 +12,14 @@ import {HttpClient} from '@angular/common/http';
 export class SignupComponent {
 
   signUpForm = new FormGroup({
-      userName: new FormControl(null, [Validators.required]),
+      userName: new FormControl(null, [Validators.required, Validators.maxLength(12)]),
       email: new FormControl(null, [Validators.required]),
       password: new FormControl(null, [Validators.required])
     },
     {updateOn: 'change'}
   );
   errorMessage!: string;
-  constructor(private userService: UserService, private router: Router, private http: HttpClient) { }
+  constructor(private userService: UserService, private router: Router) { }
 
   doSignUp(): void {
     if (this.signUpForm.valid) {
@@ -27,12 +27,14 @@ export class SignupComponent {
       this.userService.signUpFireBase(email, password).subscribe(
         (data: any) => {
           console.log('success', data);
-          this.http.post('http://localhost:8083/api/v1/user', {
+          this.userService.saveUser({
             userName,
             email,
-            token: data.idToken
+            idToken: data.idToken
           }).subscribe(() => {
             this.errorMessage = '';
+            data.displayName = userName;
+            this.userService.updateUserProfileFirebase(data);
             this.userService.createUserSession(data);
             this.router.navigate(['/']);
           });

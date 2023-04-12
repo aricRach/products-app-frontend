@@ -17,7 +17,7 @@ export class AuthGuard implements CanActivate {
       map((user) => !!user), // converting the user object into a boolean
       tap((isAuthenticated) => { // tapping into the data, to run a custom logic dependent on the value
       if (!isAuthenticated) {
-        this.router.navigate(['/login'], {
+        this.router.navigate(['/user/login'], {
           queryParams: {redirectTo: state.url}
         });
       }

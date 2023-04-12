@@ -6,7 +6,6 @@ import { Observable, Subject} from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import {FileUpload} from './file-upload';
 import {UserService} from '../user/services/user.service';
-import {ProductService} from '../services/product.service';
 
 @Injectable({
   providedIn: 'root'
@@ -31,7 +30,6 @@ export class FileUploadService {
     uploadTask.snapshotChanges().pipe(
       finalize(() => {
         storageRef.getDownloadURL().subscribe((downloadURL: string) => {
-          console.log(downloadURL);
           this.imageSubject.next({downloadURL, productId});
           fileUpload.url = downloadURL;
           fileUpload.name = fileUpload.file.name;

@@ -112,7 +112,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
       console.log('add to cart', data);
       this.store.dispatch(new AddToCart(data));
     } else {
-      this.router.navigate(['/login']);
+      this.router.navigate(['/user/login']);
     }
   }
 

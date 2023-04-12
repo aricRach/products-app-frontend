@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {environment} from '../../../environments/environment';
+import {User} from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,10 @@ export class UserApiService {
     return this.httpClient.post(url, data);
   }
 
+  saveUser(user: User): Observable<any> {
+    return this.httpClient.post('http://localhost:8083/api/v1/user', user);
+  }
+
   changePassword(password: string, idToken: string): Observable<any> {
     const url = `https://identitytoolkit.googleapis.com/v1/accounts:update?key=${environment.apiKey}`;
     const data = {idToken, password, returnSecureToken: true};
@@ -34,8 +39,13 @@ export class UserApiService {
     return this.httpClient.post(url, data);
   }
 
-  setToken(user: { email: any; token: any }): Observable<any> {
+  setToken(user: User): Observable<any> {
     const url = `http://localhost:8083/api/v1/user/set-token`;
-    return this.httpClient.post(url, user);
+    return this.httpClient.post(url, user, {responseType: 'text'});
+  }
+
+  updateUserProfileFirebase(userDetails: any): Observable<any> {
+    const url = `https://identitytoolkit.googleapis.com/v1/accounts:update?key=${environment.apiKey}`;
+    return this.httpClient.post(url, userDetails);
   }
 }
